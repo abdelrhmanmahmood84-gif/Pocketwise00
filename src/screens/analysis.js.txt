@@ -1,0 +1,56 @@
+(function initAnalysisDashboard() {
+  const fmt = (n) => '$' + Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const setText = (id, txt) => { const el = document.getElementById(id); if (el) el.textContent = txt; };
+
+  async function loadRealAnalytics() {
+    const sb = window.__pwSupabase;
+    if (!sb) return;
+
+    const { data: userData } = await sb.auth.getUser();
+    if (!userData?.user) {
+      setText('ana-audit-badge', 'Sign in to view real audit');
+      return;
+    }
+
+    try {
+      const api = window.__pwApi;
+      const analytics = api ? await api.analytics.getFinancialAnalytics() : null;
+
+      if (!analytics) return;
+
+      const cur = analytics.currentMonth;
+      setText('ana-income-val', fmt(cur.totalIncome));
+      setText('ana-expense-val', fmt(cur.totalExpenses));
+      setText('ana-savings-val', (cur.netSavings < 0 ? '-' : '') + fmt(cur.netSavings));
+      setText('ana-rate-val', cur.savingsRate.toFixed(1) + '%');
+
+      setText('ana-income-change', (cur.incomeChangePercent >= 0 ? '+' : '') + cur.incomeChangePercent + '%');
+      setText('ana-expense-change', (cur.expenseChangePercent >= 0 ? '+' : '') + cur.expenseChangePercent + '%');
+      setText('ana-savings-change', (cur.savingsChangePercent >= 0 ? '+' : '') + cur.savingsChangePercent + '%');
+
+      const rateDiff = Math.round((cur.savingsRate - 50) * 10) / 10;
+      setText('ana-rate-diff', (rateDiff >= 0 ? '+' : '') + rateDiff + '%');
+
+      const savingsProgress = document.getElementById('ana-savings-progress');
+      if (savingsProgress) {
+        savingsProgress.style.width = Math.min(100, Math.max(0, cur.savingsRate)) + '%';
+      }
+
+      const rateProgress = document.getElementById('ana-rate-progress');
+      if (rateProgress) {
+        rateProgress.style.width = Math.min(100, Math.max(0, (cur.savingsRate / 50) * 100)) + '%';
+      }
+
+      setText('ana-audit-badge', cur.monthYear + ' Audit (Live)');
+
+      // If categories breakdown is available, update breakdown
+      const pieTotal = document.getElementById('ana-pie-total');
+      if (pieTotal) pieTotal.textContent = '$' + Math.round(cur.totalExpenses).toLocaleString();
+    } catch (err) {
+      console.error('Failed to load analysis analytics:', err);
+    }
+  }
+
+  loadRealAnalytics();
+})();
+

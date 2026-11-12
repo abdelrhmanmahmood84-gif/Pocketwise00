@@ -11,21 +11,21 @@
       let currentRate = 0.20;
 
       function updateCalc() {
+        if (!incomeRange) return;
         const income = parseFloat(incomeRange.value);
-        incomeDisplay.textContent = '$' + income.toLocaleString();
+        if (incomeDisplay) incomeDisplay.textContent = '$' + income.toLocaleString();
 
         const monthlySave = income * currentRate;
         const totalPrincipal = monthlySave * 12;
-        // Simple benchmark 5.1% APY monthly compounding factor
         const interest = totalPrincipal * (0.051 / 2);
         const annualTotal = totalPrincipal + interest;
 
-        monthlySavedVal.textContent = '$' + Math.round(monthlySave).toLocaleString() + '.00';
-        interestEarnedVal.textContent = '+$' + Math.round(interest).toLocaleString() + '.00';
-        projectedAnnual.textContent = '$' + Math.round(annualTotal).toLocaleString();
+        if (monthlySavedVal) monthlySavedVal.textContent = '$' + Math.round(monthlySave).toLocaleString() + '.00';
+        if (interestEarnedVal) interestEarnedVal.textContent = '+$' + Math.round(interest).toLocaleString() + '.00';
+        if (projectedAnnual) projectedAnnual.textContent = '$' + Math.round(annualTotal).toLocaleString();
 
         const runway = (annualTotal / (income * 0.7)).toFixed(1);
-        runwayVal.textContent = runway + ' Months';
+        if (runwayVal) runwayVal.textContent = runway + ' Months';
       }
 
       if (incomeRange) {
@@ -46,5 +46,31 @@
       });
 
       updateCalc();
+
+      // Check if user is signed in to reflect live balance in the hero card
+      (async function checkUserHeroBalance() {
+        const sb = window.__pwSupabase;
+        if (!sb) return;
+        try {
+          const { data: userData } = await sb.auth.getUser();
+          if (!userData?.user) return;
+          const { data: txs } = await sb
+            .from('transactions')
+            .select('transaction_type, type, amount')
+            .eq('user_id', userData.user.id);
+
+          if (txs && txs.length > 0) {
+            let bal = 0;
+            txs.forEach(t => {
+              const isInc = (t.transaction_type || t.type) === 'income';
+              const a = Number(t.amount) || 0;
+              bal += isInc ? a : -a;
+            });
+            const el = document.getElementById('hero-balance-val');
+            if (el) el.textContent = '$' + bal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+          }
+        } catch (e) {
+          // Silent fallback to default showcase number
+        }
+      })();
     })();
-  

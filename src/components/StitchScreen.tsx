@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
+import { pocketwiseApi } from "@/lib/api";
 
 const NAV_PATHS: Record<string, string> = {
   home: "/",
@@ -31,9 +32,14 @@ export function StitchScreen({ html, script, active }: Props) {
     const root = ref.current;
     if (!root) return;
     root.innerHTML = html;
-    const w = window as unknown as { __pwNavigate: (to: string) => void; __pwSupabase: unknown };
+    const w = window as unknown as {
+      __pwNavigate: (to: string) => void;
+      __pwSupabase: unknown;
+      __pwApi: typeof pocketwiseApi;
+    };
     w.__pwNavigate = (to) => navigate({ to });
     w.__pwSupabase = supabase;
+    w.__pwApi = pocketwiseApi;
 
     // Highlight the active bottom-nav item.
     root.querySelectorAll<HTMLAnchorElement>("nav a[data-path]").forEach((a) => {

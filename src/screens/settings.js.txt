@@ -2,6 +2,7 @@
   // Toast Dispatcher
   window.showToast = function(msg) {
     const container = document.getElementById('toast-container');
+    if (!container) return;
     const toast = document.createElement('div');
     toast.className = 'pointer-events-auto flex items-center gap-2 bg-primary text-on-primary px-4 py-3 rounded-xl shadow-lg font-label-sm text-label-sm transition-all transform duration-300 translate-y-2 opacity-0';
     toast.innerHTML = `<span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>${msg}</span>`;
@@ -19,14 +20,115 @@
     }, 3200);
   };
 
-  // Profile Save Action
-  window.saveProfile = function() {
-    const msg = document.getElementById('profile-status-msg');
-    msg.classList.remove('hidden');
-    window.showToast('Profile parameters stored successfully.');
+  // Profile Load & Save Actions (Connected to Supabase profiles table)
+  (async function loadUserProfile() {
+    const sb = window.__pwSupabase;
+    if (!sb) return;
+    try {
+      const { data: userData } = await sb.auth.getUser();
+      if (!userData?.user) return;
+
+      const { data: profile } = await sb
+        .from('profiles')
+        .select('*')
+        .eq('id', userData.user.id)
+        .maybeSingle();
+
+      const nameInput = document.getElementById('profile-name');
+      const emailInput = document.getElementById('profile-email');
+      const phoneInput = document.getElementById('profile-phone');
+
+      if (profile) {
+        if (nameInput && profile.full_name) nameInput.value = profile.full_name;
+        if (emailInput) emailInput.value = profile.email || userData.user.email || '';
+        if (phoneInput && profile.phone_number) phoneInput.value = profile.phone_number;
+      } else if (userData.user) {
+        if (emailInput) emailInput.value = userData.user.email || '';
+      }
+    } catch (e) {
+      console.error('Failed to load profile:', e);
+    }
+  })();
+
+  window.saveProfile = async function() {
+    const sb = window.__pwSupabase;
+    if (!sb) return;
+
+    const { data: userData } = await sb.auth.getUser();
+    if (!userData?.user) {
+      window.showToast('Please sign in to update your profile.');
+      return;
+    }
+
+    const name = document.getElementById('profile-name')?.value.trim();
+    const phone = document.getElementById('profile-phone')?.value.trim();
+
+    try {
+      const { error } = await sb
+        .from('profiles')
+        .update({
+          full_name: name,
+          phone_number: phone,
+          updated_at: new Date().toISOString(),
+        })
+        .eq('id', userData.user.id);
+
+      if (error) {
+        window.showToast('Could not save profile: ' + error.message);
+        return;
+      }
+
+      const msg = document.getElementById('profile-status-msg');
+      if (msg) msg.classList.remove('hidden');
+      window.showToast('Profile parameters stored successfully.');
+      setTimeout(() => {
+        if (msg) msg.classList.add('hidden');
+      }, 4000);
+    } catch (err) {
+      window.showToast('Error: ' + err.message);
+    }
+  };
+
+  // Sign out handler
+  window.handleSignOut = async function() {
+    const sb = window.__pwSupabase;
+    if (sb) {
+      await sb.auth.signOut();
+    }
+    window.showToast('Signed out of PocketWise.');
     setTimeout(() => {
-      msg.classList.add('hidden');
-    }, 4000);
+      if (window.__pwNavigate) window.__pwNavigate('/auth');
+    }, 800);
+  };
+
+  // Password rotation connected to Supabase Auth
+  window.changePassword = async function() {
+    const n = document.getElementById('new-pass');
+    const c = document.getElementById('conf-pass');
+    if (!n.value || !c.value) {
+      window.showToast('Please enter and confirm your new passphrase.');
+      return;
+    }
+    if (n.value !== c.value) {
+      window.showToast('Passphrase confirmation does not match.');
+      return;
+    }
+
+    const sb = window.__pwSupabase;
+    if (!sb) return;
+
+    try {
+      const { error } = await sb.auth.updateUser({ password: n.value });
+      if (error) {
+        window.showToast('Failed to update password: ' + error.message);
+        return;
+      }
+      n.value = '';
+      c.value = '';
+      window.showToast('Master passphrase rotated and synced.');
+    } catch (err) {
+      window.showToast('Error: ' + err.message);
+    }
   };
 
   // Avatar Upload / Remove
@@ -37,7 +139,7 @@
       if (e.target.files && e.target.files[0]) {
         const reader = new FileReader();
         reader.onload = function(evt) {
-          avatarPreview.src = evt.target.result;
+          if (avatarPreview) avatarPreview.src = evt.target.result;
           window.showToast('Avatar updated.');
         };
         reader.readAsDataURL(e.target.files[0]);
@@ -48,7 +150,7 @@
   const btnRemoveAvatar = document.getElementById('btn-remove-avatar');
   if (btnRemoveAvatar) {
     btnRemoveAvatar.addEventListener('click', function() {
-      avatarPreview.src = 'https://ui-avatars.com/api/?name=Alex+Mercer&background=000f3f&color=ffffff&size=160';
+      if (avatarPreview) avatarPreview.src = 'https://ui-avatars.com/api/?name=User&background=000f3f&color=ffffff&size=160';
       window.showToast('Profile photo reset to initials.');
     });
   }
@@ -68,7 +170,7 @@
     }
   };
 
-  // Theme Switcher Mock
+  // Theme Switcher
   window.selectTheme = function(mode) {
     const lightCard = document.getElementById('theme-light-card');
     const darkCard = document.getElementById('theme-dark-card');
@@ -76,20 +178,16 @@
     const darkCheck = document.getElementById('dark-check');
 
     if (mode === 'light') {
-      lightCard.classList.add('shadow-md');
-      lightCard.classList.remove('opacity-80');
-      darkCard.classList.remove('shadow-md');
-      darkCard.classList.add('opacity-80');
-      lightCheck.classList.remove('hidden');
-      darkCheck.classList.add('hidden');
+      if (lightCard) { lightCard.classList.add('shadow-md'); lightCard.classList.remove('opacity-80'); }
+      if (darkCard) { darkCard.classList.remove('shadow-md'); darkCard.classList.add('opacity-80'); }
+      if (lightCheck) lightCheck.classList.remove('hidden');
+      if (darkCheck) darkCheck.classList.add('hidden');
       window.showToast('Solar Light theme activated.');
     } else {
-      darkCard.classList.add('shadow-md');
-      darkCard.classList.remove('opacity-80');
-      lightCard.classList.remove('shadow-md');
-      lightCard.classList.add('opacity-80');
-      darkCheck.classList.remove('hidden');
-      lightCheck.classList.add('hidden');
+      if (darkCard) { darkCard.classList.add('shadow-md'); darkCard.classList.remove('opacity-80'); }
+      if (lightCard) { lightCard.classList.remove('shadow-md'); lightCard.classList.add('opacity-80'); }
+      if (darkCheck) darkCheck.classList.remove('hidden');
+      if (lightCheck) lightCheck.classList.add('hidden');
       window.showToast('Nocturne Dark preview rendered.');
     }
   };
@@ -103,6 +201,7 @@
   // Toggle Switches
   window.toggleSwitch = function(btn) {
     const knob = btn.querySelector('span');
+    if (!knob) return;
     const isChecked = knob.classList.contains('translate-x-6');
     if (isChecked) {
       knob.classList.remove('translate-x-6');
@@ -127,25 +226,6 @@
     window.showToast('Google Federated Auth unlinked.');
   };
 
-  // Password Mock
-  window.changePassword = function() {
-    const curr = document.getElementById('curr-pass');
-    const n = document.getElementById('new-pass');
-    const c = document.getElementById('conf-pass');
-    if (!curr.value || !n.value || !c.value) {
-      window.showToast('Please fill out all passphrase fields.');
-      return;
-    }
-    if (n.value !== c.value) {
-      window.showToast('Passphrase confirmation does not match.');
-      return;
-    }
-    curr.value = '';
-    n.value = '';
-    c.value = '';
-    window.showToast('Master passphrase rotated and synced.');
-  };
-
   // Revoke Session Actions
   window.revokeSession = function(id) {
     const el = document.getElementById(id);
@@ -168,19 +248,25 @@
 
   // Delete Modal Operations
   window.openDeleteModal = function() {
-    document.getElementById('delete-modal').classList.remove('hidden');
+    const m = document.getElementById('delete-modal');
+    if (m) m.classList.remove('hidden');
   };
 
   window.closeDeleteModal = function() {
-    document.getElementById('delete-modal').classList.add('hidden');
-    document.getElementById('delete-confirmation-input').value = '';
+    const m = document.getElementById('delete-modal');
+    if (m) m.classList.add('hidden');
+    const input = document.getElementById('delete-confirmation-input');
+    if (input) input.value = '';
     const btn = document.getElementById('confirm-delete-btn');
-    btn.disabled = true;
-    btn.classList.add('opacity-50', 'cursor-not-allowed');
+    if (btn) {
+      btn.disabled = true;
+      btn.classList.add('opacity-50', 'cursor-not-allowed');
+    }
   };
 
   window.validateDeleteInput = function(val) {
     const btn = document.getElementById('confirm-delete-btn');
+    if (!btn) return;
     if (val.trim() === 'DELETE POCKETWISE') {
       btn.disabled = false;
       btn.classList.remove('opacity-50', 'cursor-not-allowed');
@@ -190,14 +276,21 @@
     }
   };
 
-  window.confirmPermanentDelete = function() {
+  window.confirmPermanentDelete = async function() {
     window.closeDeleteModal();
+    const sb = window.__pwSupabase;
+    if (sb) {
+      await sb.auth.signOut();
+    }
     window.showToast('Account scheduled for immediate purge.');
+    setTimeout(() => {
+      if (window.__pwNavigate) window.__pwNavigate('/');
+    }, 1200);
   };
 
   // Smooth scroll sync for navigation items
   document.querySelectorAll('.settings-nav-item').forEach(item => {
-    item.addEventListener('click', function(e) {
+    item.addEventListener('click', function() {
       document.querySelectorAll('.settings-nav-item').forEach(nav => {
         nav.classList.remove('bg-surface-container', 'text-on-surface');
         nav.classList.add('text-on-surface-variant');
