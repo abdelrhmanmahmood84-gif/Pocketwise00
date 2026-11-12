@@ -1,30 +1,169 @@
-# Project Showcase Hub
+# 🪙 PocketWise — Take Control of Your Money
 
-Build this app using the HTML files referenced below. You can hotlink the images referenced in the HTML. The attached images are screenshots of the desired screens. Here are public links to the html of the screens which you should read and use to build the app:
+> **Calm, institutional-grade clarity for your personal finances, wealth tracking, and multi-currency budgeting.**
 
-1. https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJyEgxzdGl0Y2hfZmlsZXMaYgosc3RpdGNoX2h0bWxfMDAwNjVlZTYzMDM1MTRlZDAyM2JlOGYwMjUzMDA5NmQSCxIHEKb5vqicHhgBkgEkCgpwcm9qZWN0X2lkEhZCFDE2MDMxNTYxNTg4NzgzMzY5MjEy&filename=&opi=89354086
-2. https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJyEgxzdGl0Y2hfZmlsZXMaYgosc3RpdGNoX2h0bWxfMDAwNjVlZTYyZjEzMmNiYTAyM2JjMjZlY2YxMWFmNTASCxIHEKb5vqicHhgBkgEkCgpwcm9qZWN0X2lkEhZCFDE2MDMxNTYxNTg4NzgzMzY5MjEy&filename=&opi=89354086
-3. https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJyEgxzdGl0Y2hfZmlsZXMaYgosc3RpdGNoX2h0bWxfMDAwNjVlZTYzMWU0ZmZhODAyM2JjMjZlY2YxMWFmNTASCxIHEKb5vqicHhgBkgEkCgpwcm9qZWN0X2lkEhZCFDE2MDMxNTYxNTg4NzgzMzY5MjEy&filename=&opi=89354086
-4. https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJyEgxzdGl0Y2hfZmlsZXMaYgosc3RpdGNoX2h0bWxfMDAwNjVlZTYzMDY2YWY1YzAyM2JjYTVjNWIxMmU2Y2ISCxIHEKb5vqicHhgBkgEkCgpwcm9qZWN0X2lkEhZCFDE2MDMxNTYxNTg4NzgzMzY5MjEy&filename=&opi=89354086
-5. https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJyEgxzdGl0Y2hfZmlsZXMaYgosc3RpdGNoX2h0bWxfMDAwNjVlZTYzMjIzNzhiYjA0NzlmY2MxZTQxNzRkZDMSCxIHEKb5vqicHhgBkgEkCgpwcm9qZWN0X2lkEhZCFDE2MDMxNTYxNTg4NzgzMzY5MjEy&filename=&opi=89354086
+[![React 19](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](https://react.dev/)
+[![TanStack Start](https://img.shields.io/badge/TanStack-Start-FF4154?logo=tanstack&logoColor=white)](https://tanstack.com/start)
+[![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Supabase](https://img.shields.io/badge/Supabase-Backend-3ECF8E?logo=supabase&logoColor=white)](https://supabase.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
-This project was built with [Lovable](https://lovable.dev).
+---
 
-## Build with Lovable
+## 📖 Overview
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/44fe2f8c-5977-42f8-be16-83bfd382d40d).
+**PocketWise** is a full-stack personal finance and wealth management dashboard designed for effortless tracking of income, expenses, and investment portfolios. Built with React 19, TanStack Start, and Tailwind CSS v4, it combines institutional financial rigor with an elegant, responsive user experience.
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+---
 
-## Development
+## ✨ Key Features
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+- **📊 Consolidated Net Worth & Balance Tracking**: View real-time liquid wealth, monthly cashflow momentum, and net assets across accounts.
+- **📈 Advanced Analytics & Visual Rhythm**: Interactive category breakdowns, cash flow graphs, and predictive budget pacing powered by SVG and chart primitives.
+- **💳 Unified Multi-Currency Wallet**: Track checking, savings, fiat currencies (USD, EUR, GBP), and digital assets in one centralized vault.
+- **🔐 Secure Authentication**: Integrated user authentication powered by Supabase with email/password and social login support.
+- **⚙️ Customizable Settings**: Fine-grained controls for currencies, notification preferences, dark/light theme, and security settings.
+- **📱 Responsive by Design**: Fully responsive layout tailored for desktop, tablet, and mobile screens.
 
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
+---
+
+## 🖼️ Application Preview
+
+### Desktop Views
+
+| Home / Dashboard | Financial Analysis |
+| :---: | :---: |
+| ![Home](d_home.png) | ![Analysis](d_analysis.png) |
+
+| Multi-Asset Wallet | Profile & Settings |
+| :---: | :---: |
+| ![Wallet](d_wallet.png) | ![Settings](d_settings.png) |
+
+### Mobile Views
+
+<p align="center">
+  <img src="m_home.png" width="22%" alt="Mobile Home" />
+  <img src="m_analysis.png" width="22%" alt="Mobile Analysis" />
+  <img src="m_wallet.png" width="22%" alt="Mobile Wallet" />
+  <img src="m_settings.png" width="22%" alt="Mobile Settings" />
+</p>
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework**: [React 19](https://react.dev) + [TanStack Start](https://tanstack.com/start)
+- **Routing**: [TanStack Router](https://tanstack.com/router) (file-based routing)
+- **Bundler**: [Vite 8](https://vitejs.dev/) + Nitro server engine
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **UI Primitives**: [Radix UI](https://www.radix-ui.com/) & Lucide React Icons
+- **Data & Backend**: [Supabase](https://supabase.com/) & [Drizzle ORM](https://orm.drizzle.team/)
+- **Language**: TypeScript
+
+---
+
+## 📂 Project Structure
+
+```text
+Pocketwise00/
+├── public/                 # Static assets & branding logos
+├── src/
+│   ├── components/         # Reusable UI widgets & Stitch screen bridge
+│   │   └── ui/             # Radix UI primitives (dialogs, buttons, inputs)
+│   ├── routes/             # TanStack Router route definitions
+│   │   ├── __root.tsx      # Root layout & meta tags
+│   │   ├── index.tsx       # / (Home / Landing view)
+│   │   ├── analysis.tsx    # /analysis (Spending analytics & metrics)
+│   │   ├── wallet.tsx      # /wallet (Accounts & transaction history)
+│   │   ├── auth.tsx        # /auth (Login & onboarding)
+│   │   └── settings.tsx    # /settings (Profile & preferences)
+│   ├── screens/            # Screen templates & client-side interaction scripts
+│   ├── integrations/       # Supabase client & authentication middleware
+│   └── styles.css          # Design system variables & Tailwind CSS setup
+├── drizzle/                # Database schemas & migrations
+├── .env.example            # Environment variable template
+└── package.json            # Project dependencies & scripts
 ```
+
+---
+
+## 🚦 Getting Started
+
+### Prerequisites
+
+Ensure you have the following installed on your machine:
+- **Node.js** (v18.0.0 or later) or **Bun**
+- **npm**, **pnpm**, or **bun**
+- **Git**
+
+### Installation
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/abdelrhmanmahmood84-gif/Pocketwise00.git
+   cd Pocketwise00
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   # or
+   bun install
+   ```
+
+3. **Configure Environment Variables**:
+   Copy the example environment file and fill in your Supabase credentials:
+   ```bash
+   cp .env.example .env
+   ```
+
+   Edit `.env`:
+   ```env
+   SUPABASE_PROJECT_ID="your_supabase_project_id"
+   SUPABASE_PUBLISHABLE_KEY="your_supabase_publishable_key"
+   SUPABASE_URL="https://your_supabase_project.supabase.co"
+   VITE_SUPABASE_PROJECT_ID="your_supabase_project_id"
+   VITE_SUPABASE_PUBLISHABLE_KEY="your_supabase_publishable_key"
+   VITE_SUPABASE_URL="https://your_supabase_project.supabase.co"
+   ```
+
+4. **Start the development server**:
+   ```bash
+   npm run dev
+   # or
+   bun run dev
+   ```
+
+   Open [http://localhost:3000](http://localhost:3000) (or the port specified in terminal) in your browser.
+
+---
+
+## 📜 Available Scripts
+
+| Command | Description |
+| :--- | :--- |
+| `npm run dev` | Starts the local Vite development server with hot reloading |
+| `npm run build` | Builds the application for production deployment |
+| `npm run preview` | Previews the production build locally |
+| `npm run lint` | Runs ESLint to check for code quality and syntax issues |
+| `npm run format` | Formats all code using Prettier |
+| `npm run test` | Runs the test suite via Vitest |
+
+---
+
+## 🧭 Page Routes
+
+| Route | Description |
+| :--- | :--- |
+| `/` | Landing page featuring financial metrics, cashflow preview, and feature highlights |
+| `/analysis` | Spending breakdown, category analytics, and monthly pacing charts |
+| `/wallet` | Multi-asset portfolios, bank accounts, and transaction logs |
+| `/auth` | Sign-in and registration portal with OAuth support |
+| `/settings` | Profile details, display currency toggles, and security settings |
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
