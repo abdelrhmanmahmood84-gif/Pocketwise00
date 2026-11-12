@@ -1,0 +1,354 @@
+<header class="fixed top-0 left-0 right-0 z-40 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-7xl mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><img alt="PocketWise Logo" class="h-8 w-auto object-contain" src="/pocketwise-logo.png"/><span class="font-title-md text-title-md text-primary tracking-tight">PocketWise</span></div><div class="flex items-center gap-space-md"><div class="hidden sm:flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm"><span class="w-2 h-2 rounded-full bg-secondary"></span><span>USD ($)</span></div><button aria-label="Notifications" class="relative p-space-xs rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full ring-2 ring-surface"></span></button><div class="flex items-center gap-space-sm pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq4xvczIL631WAGv2WlmT4eq-zi8Cf7EjhFjKFxj_sXepZVIRhR7czqPvyUuHOU_ahMemqPPdpGhxGoYi-WT1boXLV2wQlYs2tNkc2AVIVC6WLkv_B6U2EAfkvmGhYLAmkSM-R0-mPeoJyXbU--0zLMbdRmzHvRN88SIGHj8VCUXUZ12TS9sLfkFwiBfcuKYuxbDhBn1SpC900QLgK5PBVjHeU3DGyVfbMDaa5L1QM"/></div></div></div></header><main class="w-full pt-16 pb-28 min-h-screen bg-surface"><div class="flex flex-col w-full">
+<div class="max-w-7xl mx-auto w-full px-margin md:px-margin-tablet lg:px-margin-desktop py-space-lg md:py-space-xl flex flex-col gap-space-xl">
+<!-- Top Greeting & Live Synced Bar -->
+<section class="flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="font-headline-lg text-headline-lg text-primary tracking-tight">Good morning, Alex 👋</span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-xs text-label-xs shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+            All accounts synced 2 mins ago
+          </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+          Today, Oct 24, 2024 • Cash Flow &amp; Working Capital
+        </p>
+</div>
+<div class="flex items-center gap-space-md">
+<!-- Account Switcher Pill Dropdown -->
+<div class="relative">
+<select class="appearance-none bg-surface-container-lowest text-primary font-label-md text-label-md py-2.5 pl-4 pr-10 rounded-xl shadow-sm cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" id="account-filter">
+<option value="all">All Accounts (Consolidated)</option>
+<option value="chase">Main Checking (Chase •••• 4821)</option>
+<option value="amex">Savings (Amex •••• 9102)</option>
+<option value="cash">Cash Wallet (Vault)</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">expand_more</span>
+</div>
+<!-- Quick Notifications trigger -->
+<div class="relative">
+<button class="relative w-11 h-11 flex items-center justify-center rounded-xl bg-surface-container-lowest text-primary shadow-sm hover:bg-surface-container transition-all" type="button">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+<span class="absolute top-2 right-2 w-4 h-4 rounded-full bg-error text-on-error font-label-xs text-label-xs flex items-center justify-center font-bold text-[10px]">3</span>
+</button>
+</div>
+<!-- User profile preview avatar -->
+<div class="flex items-center gap-2.5 pl-2">
+<div class="relative">
+<img class="w-11 h-11 rounded-xl object-cover shadow-sm" data-alt="Close up realistic portrait photography of a confident young financial professional Alex smiling in natural soft morning office lighting with modern aesthetic, high resolution" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYzXenEFPaopJ5H9MNC6enopDXhciCtUIMf_VVhBEjQrWuTqDhlh3molkLrDpoNDPMSNLeBHc3kSBJzfTBD3UBWIiXSPnuS6_6lCmMue8mtYAWeEImluVZEQf4-l0m25vGUd9rZCw7zMDPXRVleiyT-abV6JDxVznLlnhRo_4IXm8RC3OAi0AMZNYte-yxdF7wkGlGjt_Jr3BR4ICoFZR8CCoyk_XlYnX0FJr8qk9y"/>
+<span class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-secondary-fixed rounded-full ring-2 ring-surface"></span>
+</div>
+</div>
+</div>
+</section>
+<!-- Prominent Total Balance Hero Mosaic Bento Card -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Main High-Contrast Hero Card (Navy Gradient / Institutional Rigor) -->
+<div class="lg:col-span-8 rounded-2xl bg-gradient-to-br from-primary via-primary-container to-tertiary text-on-primary p-space-lg md:p-space-xl shadow-xl relative overflow-hidden flex flex-col justify-between min-h-[300px]">
+<!-- Subtle Ambient Mesh Circle Overlays -->
+<div class="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-tertiary-container/30 blur-3xl pointer-events-none"></div>
+<div class="absolute right-1/3 -bottom-24 w-72 h-72 rounded-full bg-secondary/15 blur-2xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col gap-space-md">
+<div class="flex items-center justify-between gap-space-md flex-wrap">
+<div class="flex items-center gap-2">
+<span class="text-tertiary-fixed font-label-xs text-label-xs uppercase tracking-wider">Total Available Net Worth</span>
+<button class="text-on-primary/70 hover:text-on-primary p-1 rounded transition-colors" id="toggle-balance-visibility" title="Toggle balance display" type="button">
+<span class="material-symbols-outlined text-[18px]" id="eye-icon">visibility</span>
+</button>
+</div>
+<div class="flex items-center gap-2 bg-on-primary/10 px-3 py-1 rounded-full text-xs font-medium text-tertiary-fixed">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span>
+              Live Rate: 1 USD = 1.000 USD
+            </div>
+</div>
+<div class="flex items-baseline gap-space-sm flex-wrap my-1">
+<h1 class="font-display-lg text-display-lg md:text-[46px] tracking-tight font-extrabold text-on-primary" id="balance-display">$0.00</h1>
+<span class="font-label-md text-label-md text-on-primary/60">USD</span>
+</div>
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container/20 text-secondary-fixed font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+              <span id="stat-net-month">+$0.00</span> net savings this month
+            </span>
+<span class="text-on-primary/60 text-xs font-label-xs" id="stat-net-change">— vs previous month</span>
+</div>
+</div>
+<!-- In-card Breakdown Badges & Active Wallet Indicators -->
+<div class="relative z-10 pt-space-lg grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<div class="flex items-center justify-between p-space-md rounded-xl bg-on-primary/5 backdrop-blur-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-secondary/20 text-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">arrow_downward</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-xs text-label-xs text-tertiary-fixed/80">Money In (Monthly)</span>
+<span class="font-headline-md text-headline-md text-secondary-container" id="stat-in-month">+$0.00</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary-container/60 text-[20px]">north_east</span>
+</div>
+<div class="flex items-center justify-between p-space-md rounded-xl bg-on-primary/5 backdrop-blur-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-error-container/20 text-error-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">arrow_upward</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-xs text-label-xs text-tertiary-fixed/80">Money Out (Monthly)</span>
+<span class="font-headline-md text-headline-md text-error-container" id="stat-out-month">-$0.00</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-error-container/60 text-[20px]">south_east</span>
+</div>
+</div>
+</div>
+<!-- Action Center & Visual Target Card -->
+<div class="lg:col-span-4 flex flex-col gap-space-md">
+<!-- Interactive Action Quick Buttons -->
+<div class="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm flex flex-col justify-between flex-1 gap-space-md">
+<div>
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-title-md text-title-md text-primary font-bold">Quick Ledger</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider">Instant Entry</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Log real-time income or outlays with automatic category indexing.</p>
+</div>
+<div class="flex flex-col gap-space-sm">
+<button class="w-full py-3.5 px-4 rounded-xl bg-secondary text-on-secondary font-label-md text-label-md flex items-center justify-center gap-2 shadow-sm hover:opacity-95 active:scale-[0.99] transition-all" id="btn-trigger-income" type="button">
+<span class="material-symbols-outlined text-[22px]">add_circle</span>
+              + Add Income (Money In)
+            </button>
+<button class="w-full py-3.5 px-4 rounded-xl bg-error text-on-error font-label-md text-label-md flex items-center justify-center gap-2 shadow-sm hover:opacity-95 active:scale-[0.99] transition-all" id="btn-trigger-expense" type="button">
+<span class="material-symbols-outlined text-[22px]">remove_circle</span>
+              − Add Expense (Money Out)
+            </button>
+</div>
+<!-- Micro Cash Flow Mini-Bar Chart (Inline SVG) -->
+<div class="pt-space-xs flex flex-col gap-2">
+<div class="flex items-center justify-between text-xs font-medium text-on-surface-variant">
+<span>Weekly In vs. Out Flow</span>
+<span class="font-label-xs text-secondary font-semibold" id="stat-margin">0% Savings Margin</span>
+</div>
+<svg class="w-full h-12" fill="none" preserveaspectratio="none" viewbox="0 0 240 48"><line stroke="#e0e3e5" stroke-width="1" x1="0" x2="240" y1="44" y2="44"></line><line stroke="#e0e3e5" stroke-dasharray="3 3" stroke-width="1" x1="0" x2="240" y1="24" y2="24"></line><g id="weekly-bars"></g></svg>
+<div id="weekly-labels" class="flex justify-between text-[10px] text-on-surface-variant font-label-xs uppercase tracking-wider">
+<span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+</div>
+</div>
+</div>
+<!-- Pocket Allocation Quick Snapshot Card -->
+<div class="bg-surface-container p-space-md rounded-2xl flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-surface-container-highest flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">account_balance</span>
+</div>
+<div>
+<div class="font-label-md text-label-md text-primary" id="stat-account-name">No account yet</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant" id="stat-account-sub">Primary Operating</div>
+</div>
+</div>
+<span class="font-title-md text-title-md font-bold text-primary" id="stat-account-total">$0.00</span>
+</div>
+</div>
+</section>
+<!-- INLINE / MODAL TRANSACTION FORM (Hidden by default, slides down gracefully or toggles) -->
+<section class="hidden transition-all duration-300" id="transaction-form-panel">
+<div class="bg-surface-container-lowest rounded-2xl p-space-lg md:p-space-xl shadow-lg relative">
+<div class="flex items-center justify-between mb-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-secondary-fixed flex items-center justify-center text-secondary" id="form-type-indicator-badge">
+<span class="material-symbols-outlined text-[24px]" id="form-type-icon">add_circle</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-primary" id="form-title">Record New Transaction</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Update balances instantly and categorize for smart reports.</p>
+</div>
+</div>
+<button class="w-9 h-9 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors" id="btn-close-form" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- The Input Matrix -->
+<form class="grid grid-cols-1 md:grid-cols-12 gap-space-md md:gap-space-lg" id="new-transaction-form">
+<!-- Flow Type Switcher (Income vs Expense) -->
+<div class="md:col-span-12 flex flex-col gap-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Transaction Nature</label>
+<div class="grid grid-cols-2 gap-space-sm max-w-md bg-surface-container-low p-1.5 rounded-xl">
+<label class="flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg cursor-pointer transition-all select-none bg-secondary text-on-secondary shadow-sm" id="label-income-radio">
+<input checked="" class="hidden" id="radio-income" name="tx-type" type="radio" value="income"/>
+<span class="material-symbols-outlined text-[18px]">trending_up</span>
+<span class="font-label-md text-label-md">Income (Money In)</span>
+</label>
+<label class="flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg cursor-pointer transition-all select-none text-on-surface-variant hover:text-on-surface" id="label-expense-radio">
+<input class="hidden" id="radio-expense" name="tx-type" type="radio" value="expense"/>
+<span class="material-symbols-outlined text-[18px]">trending_down</span>
+<span class="font-label-md text-label-md">Expense (Money Out)</span>
+</label>
+</div>
+</div>
+<!-- Transaction Amount Input -->
+<div class="md:col-span-6 flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface">Amount ($ USD) *</label>
+<div class="relative flex items-center">
+<span class="absolute left-4 font-headline-md text-headline-md text-on-surface-variant select-none">$</span>
+<input class="w-full h-14 pl-10 pr-4 rounded-xl bg-surface-container-low text-primary font-headline-md text-headline-md focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/20 transition-all" id="tx-amount" min="0.01" placeholder="0.00" required="" step="0.01" type="number"/>
+</div>
+</div>
+<!-- Description / Entity -->
+<div class="md:col-span-6 flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface">Merchant or Source *</label>
+<input class="w-full h-14 px-4 rounded-xl bg-surface-container-low text-primary font-body-lg text-body-lg focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/20 transition-all" id="tx-merchant" placeholder="e.g. Acme Corp, Trader Joe's, Consulting" required="" type="text"/>
+</div>
+<!-- Category Selector -->
+<div class="md:col-span-4 flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface">Category *</label>
+<div class="relative">
+<select class="w-full h-12 px-4 rounded-xl bg-surface-container-low text-primary font-body-md text-body-md appearance-none focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/20 transition-all cursor-pointer" id="tx-category">
+<!-- Will be dynamically tailored by JS -->
+<option value="Salary">Salary &amp; Wages</option>
+<option value="Freelance">Freelance &amp; Consulting</option>
+<option value="Investment">Investment Dividends</option>
+<option value="Food">Groceries &amp; Food</option>
+<option value="Dining">Dining &amp; Coffee</option>
+<option value="Rent">Rent &amp; Mortgage</option>
+<option value="Utilities">Utilities &amp; Bills</option>
+<option value="Transportation">Transportation &amp; Gas</option>
+<option value="Subscriptions">Subscriptions &amp; Tech</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">arrow_drop_down</span>
+</div>
+</div>
+<!-- Target Account -->
+<div class="md:col-span-4 flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface">Target Account *</label>
+<div class="relative">
+<select class="w-full h-12 px-4 rounded-xl bg-surface-container-low text-primary font-body-md text-body-md appearance-none focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/20 transition-all cursor-pointer" id="tx-account">
+<option value="Chase •••• 4821">Main Checking (Chase •••• 4821)</option>
+<option value="Amex •••• 9102">High-Yield Savings (Amex •••• 9102)</option>
+<option value="Cash Vault">Cash Wallet (Vault)</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">account_balance_wallet</span>
+</div>
+</div>
+<!-- Transaction Date -->
+<div class="md:col-span-4 flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface">Date Recorded *</label>
+<input class="w-full h-12 px-4 rounded-xl bg-surface-container-low text-primary font-body-md text-body-md focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/20 transition-all" id="tx-date" type="date" value="2024-10-24"/>
+</div>
+<!-- Optional Notes / Tagging -->
+<div class="md:col-span-12 flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Note or Receipt Reference (Optional)</label>
+<input class="w-full h-12 px-4 rounded-xl bg-surface-container-low text-primary font-body-md text-body-md focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/20 transition-all" id="tx-notes" placeholder="Invoice #492, split dinner with Sarah, etc." type="text"/>
+</div>
+<!-- CTA Submission -->
+<div class="md:col-span-12 flex items-center justify-end gap-space-sm pt-space-xs">
+<button class="px-5 py-3 rounded-xl text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors" id="btn-cancel-tx" type="button">
+              Cancel
+            </button>
+<button class="px-8 py-3 rounded-xl bg-primary text-on-primary font-label-md text-label-md shadow-md hover:bg-primary-container active:scale-[0.99] transition-all flex items-center gap-2" type="submit">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+              Save Transaction
+            </button>
+</div>
+</form>
+</div>
+</section>
+<!-- Success Toast Notification (Dismissable & Auto-timed) -->
+<div class="hidden fixed top-20 right-6 z-50 bg-primary text-on-primary px-5 py-3.5 rounded-2xl shadow-xl flex items-center gap-3 animate-bounce" id="toast-success">
+<span class="material-symbols-outlined text-secondary-fixed text-[24px]">verified</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md">Transaction Logged</span>
+<span class="font-body-sm text-body-sm text-tertiary-fixed" id="toast-text">Balance updated successfully.</span>
+</div>
+<button class="ml-2 text-on-primary/60 hover:text-on-primary" id="btn-close-toast">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- RECENT TRANSACTIONS LEDGER SECTION -->
+<section class="flex flex-col gap-space-md">
+<!-- Ledger Header & Tools -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-space-sm">
+<h2 class="font-headline-lg text-headline-lg text-primary">Recent Transactions</h2>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-xs text-label-xs" id="tx-count-badge">
+              0 Records
+            </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">All categorized cash movements across connected financial streams.</p>
+</div>
+<div class="flex items-center gap-space-sm flex-wrap">
+<!-- Export Button -->
+<button class="px-4 py-2.5 rounded-xl bg-surface-container-lowest text-primary font-label-md text-label-md shadow-sm hover:bg-surface-container flex items-center gap-2 transition-all" id="btn-export-csv" type="button">
+<span class="material-symbols-outlined text-[18px]">download</span>
+            Export CSV
+          </button>
+<!-- Quick Date Filter -->
+<div class="relative">
+<select class="appearance-none bg-surface-container-lowest text-on-surface-variant font-label-sm text-label-sm py-2.5 pl-3.5 pr-8 rounded-xl shadow-sm focus:outline-none cursor-pointer" id="date-range-filter">
+<option value="this-month">This Month (October)</option>
+<option value="last-month">Last Month (September)</option>
+<option value="last-90">Last 90 Days</option>
+<option value="year">Full Year 2024</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Search & Filters Toolbar -->
+<div class="bg-surface-container-lowest p-space-md rounded-2xl shadow-sm flex flex-col md:flex-row items-stretch md:items-center justify-between gap-space-md">
+<!-- Search Field -->
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full h-11 pl-10 pr-4 rounded-xl bg-surface-container-low text-primary font-body-md text-body-md focus:outline-none focus:bg-surface-container focus:ring-2 focus:ring-primary/20 transition-all" id="search-input" placeholder="Search transactions by merchant, note, or amount..." type="text"/>
+</div>
+<!-- Filter Chips Matrix -->
+<div class="flex items-center gap-space-xs overflow-x-auto pb-1 md:pb-0">
+<button class="filter-chip px-4 py-2 rounded-full font-label-sm text-label-sm transition-all bg-primary text-on-primary shadow-sm" data-filter="all" type="button">
+            All Types
+          </button>
+<button class="filter-chip px-4 py-2 rounded-full font-label-sm text-label-sm transition-all bg-surface-container-low text-on-surface-variant hover:bg-surface-container" data-filter="income" type="button">
+            Income Only
+          </button>
+<button class="filter-chip px-4 py-2 rounded-full font-label-sm text-label-sm transition-all bg-surface-container-low text-on-surface-variant hover:bg-surface-container" data-filter="expense" type="button">
+            Expenses Only
+          </button>
+</div>
+<!-- Category Dropdown Filter -->
+<div class="relative min-w-[150px]">
+<select class="w-full appearance-none bg-surface-container-low text-primary font-label-sm text-label-sm py-2.5 pl-3.5 pr-8 rounded-xl focus:outline-none cursor-pointer" id="category-filter">
+<option value="all">All Categories</option>
+<option value="Salary">Salary &amp; Wages</option>
+<option value="Food">Groceries</option>
+<option value="Transportation">Transportation</option>
+<option value="Subscriptions">Subscriptions</option>
+<option value="Utilities">Utilities</option>
+<option value="Dining">Dining</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">filter_list</span>
+</div>
+</div>
+<!-- Transaction List Rows Container -->
+<div class="flex flex-col gap-space-xs" id="transactions-container">
+<!-- No Results Placeholder state -->
+<div class="hidden py-space-xl text-center bg-surface-container-lowest rounded-2xl shadow-sm flex flex-col items-center justify-center gap-2" id="no-results-state">
+<span class="material-symbols-outlined text-[48px] text-on-surface-variant">manage_search</span>
+<span class="font-headline-md text-headline-md text-primary">No transactions found</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm">No transaction matches your active filter or search query. Try broadening your criteria.</p>
+<button class="mt-2 px-4 py-2 rounded-xl bg-surface-container text-primary font-label-sm text-label-sm hover:bg-surface-container-high transition-colors" id="btn-reset-filters" type="button">
+          Reset All Filters
+        </button>
+</div>
+<!-- Pagination / Load More Footer -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-md pt-space-sm">
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+          Showing <span id="visible-count">0</span> of <span id="total-count">0</span> recorded items
+        </span>
+<button class="px-6 py-2.5 rounded-xl bg-surface-container-lowest text-primary font-label-md text-label-md shadow-sm hover:bg-surface-container flex items-center gap-2 transition-all" id="btn-load-more" type="button">
+<span class="material-symbols-outlined text-[18px]">expand_more</span>
+          Load Older Transactions
+        </button>
+</div>
+</section>
+</div>
+</div>
+</main><aside class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-lg pointer-events-auto"><nav class="flex items-center justify-around bg-surface-container-lowest/95 backdrop-blur-xl border border-outline-variant/40 rounded-full px-space-sm py-space-xs shadow-[0_10px_25px_-5px_rgba(15,23,42,0.12),0_8px_10px_-6px_rgba(15,23,42,0.06)]" data-active-classes="bg-primary text-on-primary shadow-sm"><a class="flex flex-col items-center gap-0.5 px-2.5 sm:px-space-md py-1.5 rounded-full text-on-surface-variant hover:text-on-surface transition-all" data-path="home" href="#"><span class="material-symbols-outlined text-[20px]">home</span><span class="font-label-xs text-label-xs">Home</span></a><a class="flex flex-col items-center gap-0.5 px-2.5 sm:px-space-md py-1.5 rounded-full text-on-surface-variant hover:text-on-surface transition-all" data-path="account" href="#"><span class="material-symbols-outlined text-[20px]">person</span><span class="font-label-xs text-label-xs">Account</span></a><a aria-current="page" class="flex flex-col items-center gap-0.5 px-2.5 sm:px-space-md py-1.5 rounded-full transition-all bg-primary text-on-primary shadow-sm" data-path="wallet" href="#"><span class="material-symbols-outlined text-[20px]">account_balance_wallet</span><span class="font-label-xs text-label-xs">Wallet</span></a><a class="flex flex-col items-center gap-0.5 px-2.5 sm:px-space-md py-1.5 rounded-full text-on-surface-variant hover:text-on-surface transition-all" data-path="analysis" href="#"><span class="material-symbols-outlined text-[20px]">bar_chart</span><span class="font-label-xs text-label-xs">Analysis</span></a><a class="flex flex-col items-center gap-0.5 px-2.5 sm:px-space-md py-1.5 rounded-full text-on-surface-variant hover:text-on-surface transition-all" data-path="settings" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span class="font-label-xs text-label-xs">Settings</span></a></nav></aside>

@@ -1,0 +1,382 @@
+
+  (function initWalletDashboard() {
+    let currentBalance = 0;
+    let balanceHidden = false;
+    let activeTypeFilter = 'all';
+
+    // Elements
+    const balanceDisplay = document.getElementById('balance-display');
+    const eyeIcon = document.getElementById('eye-icon');
+    const toggleBalanceBtn = document.getElementById('toggle-balance-visibility');
+    const formPanel = document.getElementById('transaction-form-panel');
+    const formTitle = document.getElementById('form-title');
+    const formTypeIndicatorBadge = document.getElementById('form-type-indicator-badge');
+    const formTypeIcon = document.getElementById('form-type-icon');
+    const radioIncome = document.getElementById('radio-income');
+    const radioExpense = document.getElementById('radio-expense');
+    const labelIncomeRadio = document.getElementById('label-income-radio');
+    const labelExpenseRadio = document.getElementById('label-expense-radio');
+    const btnTriggerIncome = document.getElementById('btn-trigger-income');
+    const btnTriggerExpense = document.getElementById('btn-trigger-expense');
+    const btnCloseForm = document.getElementById('btn-close-form');
+    const btnCancelTx = document.getElementById('btn-cancel-tx');
+    const txForm = document.getElementById('new-transaction-form');
+    const transactionsContainer = document.getElementById('transactions-container');
+    const searchInput = document.getElementById('search-input');
+    const categoryFilter = document.getElementById('category-filter');
+    const filterChips = document.querySelectorAll('.filter-chip');
+    const toast = document.getElementById('toast-success');
+    const toastText = document.getElementById('toast-text');
+    const btnCloseToast = document.getElementById('btn-close-toast');
+    const noResultsState = document.getElementById('no-results-state');
+    const visibleCount = document.getElementById('visible-count');
+    const totalCount = document.getElementById('total-count');
+    const txCountBadge = document.getElementById('tx-count-badge');
+    const btnResetFilters = document.getElementById('btn-reset-filters');
+    const btnExportCsv = document.getElementById('btn-export-csv');
+    const btnLoadMore = document.getElementById('btn-load-more');
+
+    // Balance format
+    function renderBalance() {
+      if (balanceHidden) {
+        balanceDisplay.textContent = '••••••••';
+      } else {
+        balanceDisplay.textContent = '$' + currentBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      }
+    }
+
+    const txList = [];
+    const fmt = (n) => '$' + Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const setText = (id, t) => { const el = document.getElementById(id); if (el) el.textContent = t; };
+    function renderStats() {
+      const now = new Date();
+      const ym = (d) => d.slice(0, 7);
+      const pad = (n) => String(n).padStart(2, '0');
+      const cur = now.getFullYear() + '-' + pad(now.getMonth() + 1);
+      const pd = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+      const prev = pd.getFullYear() + '-' + pad(pd.getMonth() + 1);
+      let inM = 0, outM = 0, netPrev = 0;
+      txList.forEach((t) => {
+        const m = ym(t.date || '');
+        if (m === cur) { if (t.isIncome) inM += t.amount; else outM += t.amount; }
+        if (m === prev) netPrev += t.isIncome ? t.amount : -t.amount;
+      });
+      const net = inM - outM;
+      setText('stat-in-month', '+' + fmt(inM));
+      setText('stat-out-month', '-' + fmt(outM));
+      setText('stat-net-month', (net < 0 ? '-' : '+') + fmt(net));
+      setText('stat-net-change', netPrev !== 0
+        ? ((net - netPrev) / Math.abs(netPrev) * 100 >= 0 ? '+' : '') + ((net - netPrev) / Math.abs(netPrev) * 100).toFixed(1) + '% vs previous month'
+        : '— vs previous month');
+      setText('stat-margin', (inM > 0 ? Math.max(0, Math.round(net / inM * 100)) : 0) + '% Savings Margin');
+      // Weekly bars: last 7 days, oldest first
+      const days = [];
+      for (let i = 6; i >= 0; i--) {
+        const d = new Date(now.getFullYear(), now.getMonth(), now.getDate() - i);
+        days.push({ key: d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()), inc: 0, exp: 0 });
+      }
+      txList.forEach((t) => { const d = days.find((x) => x.key === t.date); if (d) { if (t.isIncome) d.inc += t.amount; else d.exp += t.amount; } });
+      const max = Math.max(1, ...days.map((d) => Math.max(d.inc, d.exp)));
+      const g = document.getElementById('weekly-bars');
+      if (g) {
+        g.innerHTML = days.map((d, i) => {
+          const x = 12 + i * 34;
+          const hi = d.inc ? Math.max(2, d.inc / max * 38) : 0, he = d.exp ? Math.max(2, d.exp / max * 38) : 0;
+          return '<rect class="opacity-90" fill="#006e2f" height="' + hi + '" rx="3" width="8" x="' + x + '" y="' + (44 - hi) + '"></rect>' +
+                 '<rect class="opacity-80" fill="#ba1a1a" height="' + he + '" rx="3" width="8" x="' + (x + 10) + '" y="' + (44 - he) + '"></rect>';
+        }).join('');
+        const labels = document.getElementById('weekly-labels');
+        if (labels) labels.innerHTML = days.map((d) => '<span>' + 'SMTWTFS'[new Date(d.key + 'T00:00:00').getDay()] + '</span>').join('');
+      }
+      // Top account by activity
+      const accts = {};
+      txList.forEach((t) => { if (!t.account) return; const a = accts[t.account] || (accts[t.account] = { n: 0, total: 0 }); a.n++; a.total += t.isIncome ? t.amount : -t.amount; });
+      const top = Object.entries(accts).sort((a, b) => b[1].n - a[1].n)[0];
+      setText('stat-account-name', top ? top[0] : 'No account yet');
+      setText('stat-account-sub', top ? top[1].n + ' transaction' + (top[1].n === 1 ? '' : 's') : 'Primary Operating');
+      setText('stat-account-total', top ? (top[1].total < 0 ? '-' : '') + fmt(top[1].total) : '$0.00');
+    }
+
+    // Toggle balance mask
+    toggleBalanceBtn?.addEventListener('click', () => {
+      balanceHidden = !balanceHidden;
+      eyeIcon.textContent = balanceHidden ? 'visibility_off' : 'visibility';
+      renderBalance();
+    });
+
+    // Form Mode Toggling
+    function openFormWithMode(type) {
+      formPanel.classList.remove('hidden');
+      formPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      if (type === 'income') {
+        radioIncome.checked = true;
+        labelIncomeRadio.className = 'flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg cursor-pointer transition-all select-none bg-secondary text-on-secondary shadow-sm';
+        labelExpenseRadio.className = 'flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg cursor-pointer transition-all select-none text-on-surface-variant hover:text-on-surface';
+        formTitle.textContent = 'Add New Income (Money In)';
+        formTypeIndicatorBadge.className = 'w-10 h-10 rounded-xl bg-secondary-fixed flex items-center justify-center text-secondary';
+        formTypeIcon.textContent = 'add_circle';
+      } else {
+        radioExpense.checked = true;
+        labelExpenseRadio.className = 'flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg cursor-pointer transition-all select-none bg-error text-on-error shadow-sm';
+        labelIncomeRadio.className = 'flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg cursor-pointer transition-all select-none text-on-surface-variant hover:text-on-surface';
+        formTitle.textContent = 'Add New Expense (Money Out)';
+        formTypeIndicatorBadge.className = 'w-10 h-10 rounded-xl bg-error-container flex items-center justify-center text-error';
+        formTypeIcon.textContent = 'remove_circle';
+      }
+    }
+
+    btnTriggerIncome?.addEventListener('click', () => openFormWithMode('income'));
+    btnTriggerExpense?.addEventListener('click', () => openFormWithMode('expense'));
+
+    radioIncome?.addEventListener('change', () => openFormWithMode('income'));
+    radioExpense?.addEventListener('change', () => openFormWithMode('expense'));
+
+    function closeForm() {
+      formPanel.classList.add('hidden');
+      txForm.reset();
+    }
+    btnCloseForm?.addEventListener('click', closeForm);
+    btnCancelTx?.addEventListener('click', closeForm);
+
+    function showToast(msg, isError) {
+      toastText.textContent = msg;
+      toast.classList.toggle('bg-error', !!isError);
+      toast.classList.remove('hidden');
+      setTimeout(() => toast.classList.add('hidden'), 4500);
+    }
+
+    function buildCard({ isIncome, amountVal, merchant, category, account, notes, dateVal }) {
+      const esc = (v) => String(v).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+      const mEsc = esc(merchant), nEsc = esc(notes), aEsc = esc(account), dEsc = esc(dateVal);
+      // Create new Transaction Card Element
+      const newCard = document.createElement('div');
+      newCard.className = 'tx-card group bg-surface-container-lowest hover:bg-surface-container-low p-space-md rounded-2xl shadow-sm transition-all flex items-center justify-between gap-space-md animate-fadeIn';
+      newCard.setAttribute('data-type', isIncome ? 'income' : 'expense');
+      newCard.setAttribute('data-category', category);
+      newCard.setAttribute('data-merchant', merchant);
+      newCard.setAttribute('data-amount', amountVal.toFixed(2));
+
+      const typeBadgeClass = isIncome ? 'bg-secondary-fixed text-on-secondary-fixed' : 'bg-surface-container-high text-on-surface-variant';
+      const iconBg = isIncome ? 'bg-secondary-fixed/50 text-secondary' : 'bg-surface-container-highest text-primary';
+      const iconName = isIncome ? 'payments' : (category === 'Food' ? 'shopping_cart' : (category === 'Dining' ? 'local_cafe' : 'receipt_long'));
+      const formattedAmt = (isIncome ? '+' : '-') + '$' + amountVal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      const amtColor = isIncome ? 'text-secondary' : 'text-error';
+
+      newCard.innerHTML = `
+        <div class="flex items-center gap-space-md min-w-0">
+          <div class="w-12 h-12 rounded-xl ${iconBg} flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+            <span class="material-symbols-outlined text-[24px]">${iconName}</span>
+          </div>
+          <div class="flex flex-col min-w-0">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="font-headline-md text-headline-md text-primary truncate">${mEsc}</span>
+              <span class="px-2 py-0.5 rounded-full ${typeBadgeClass} font-label-xs text-label-xs font-semibold">${esc(category)}</span>
+            </div>
+            <div class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm flex-wrap">
+              <span>${dEsc}</span>
+              <span>&bull;</span>
+              <span class="inline-flex items-center gap-1">
+                <span class="material-symbols-outlined text-[14px]">account_balance</span>
+                ${aEsc}
+              </span>
+              <span>&bull;</span>
+              <span class="text-on-surface-variant/80 italic">${nEsc}</span>
+            </div>
+          </div>
+        </div>
+        <div class="text-right shrink-0">
+          <div class="font-headline-md text-headline-md font-bold ${amtColor}">${formattedAmt}</div>
+          <span class="font-label-xs text-label-xs text-on-surface-variant">Cleared</span>
+        </div>
+      `;
+      return newCard;
+    }
+
+    // Save Transaction to the database
+    txForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const isIncome = radioIncome.checked;
+      const amountVal = parseFloat(document.getElementById('tx-amount').value) || 0;
+      const merchant = document.getElementById('tx-merchant').value.trim().slice(0, 120) || 'Uncategorized';
+      const category = document.getElementById('tx-category').value || 'General';
+      const account = document.getElementById('tx-account').value || 'Chase •••• 4821';
+      const notes = document.getElementById('tx-notes').value.trim().slice(0, 500) || 'Manual entry';
+      const dateVal = document.getElementById('tx-date').value || new Date().toISOString().slice(0, 10);
+
+      if (!(amountVal > 0)) { showToast('Please enter an amount greater than 0.', true); return; }
+
+      const sb = window.__pwSupabase;
+      const { data: userData } = await sb.auth.getUser();
+      if (!userData?.user) {
+        showToast('Please sign in to save transactions.', true);
+        setTimeout(() => window.__pwNavigate && window.__pwNavigate('/auth'), 1200);
+        return;
+      }
+      const submitBtn = txForm.querySelector('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+      const { error } = await sb.from('transactions').insert({
+        user_id: userData.user.id,
+        type: isIncome ? 'income' : 'expense',
+        amount: Math.round(amountVal * 100) / 100,
+        merchant, category, account, notes,
+        occurred_on: dateVal,
+      });
+      if (submitBtn) submitBtn.disabled = false;
+      if (error) { showToast('Could not save: ' + error.message, true); return; }
+
+      // Update in-memory balance
+      if (isIncome) {
+        currentBalance += amountVal;
+      } else {
+        currentBalance -= amountVal;
+      }
+      txList.push({ isIncome, amount: amountVal, date: dateVal, account });
+      renderBalance();
+      renderStats();
+
+      const newCard = buildCard({ isIncome, amountVal, merchant, category, account, notes, dateVal });
+      const formattedAmt = (isIncome ? '+' : '-') + '$' + amountVal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+      transactionsContainer.prepend(newCard);
+      closeForm();
+
+      // Show toast
+      toastText.textContent = `${isIncome ? 'Income' : 'Expense'} of ${formattedAmt} saved to your wallet`;
+      toast.classList.remove('bg-error');
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 4500);
+
+      filterTransactions();
+    });
+
+    btnCloseToast?.addEventListener('click', () => {
+      toast.classList.add('hidden');
+    });
+
+    // Filtering & Searching logic
+    function filterTransactions() {
+      const q = (searchInput?.value || '').trim().toLowerCase();
+      const cat = categoryFilter?.value || 'all';
+      const cards = document.querySelectorAll('.tx-card');
+      let visible = 0;
+
+      cards.forEach((card) => {
+        const type = card.getAttribute('data-type');
+        const merchant = (card.getAttribute('data-merchant') || '').toLowerCase();
+        const cardCat = card.getAttribute('data-category');
+        const amount = card.getAttribute('data-amount') || '';
+
+        const matchesType = (activeTypeFilter === 'all') || (type === activeTypeFilter);
+        const matchesCat = (cat === 'all') || (cardCat === cat);
+        const matchesSearch = !q || merchant.includes(q) || amount.includes(q) || card.textContent.toLowerCase().includes(q);
+
+        if (matchesType && matchesCat && matchesSearch) {
+          card.classList.remove('hidden');
+          visible++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      if (visibleCount) visibleCount.textContent = visible;
+      if (totalCount) totalCount.textContent = cards.length;
+      if (txCountBadge) txCountBadge.textContent = `${cards.length} Records`;
+
+      if (visible === 0) {
+        noResultsState.classList.remove('hidden');
+      } else {
+        noResultsState.classList.add('hidden');
+      }
+    }
+
+    searchInput?.addEventListener('input', filterTransactions);
+    categoryFilter?.addEventListener('change', filterTransactions);
+
+    filterChips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        filterChips.forEach((c) => {
+          c.className = 'filter-chip px-4 py-2 rounded-full font-label-sm text-label-sm transition-all bg-surface-container-low text-on-surface-variant hover:bg-surface-container';
+        });
+        chip.className = 'filter-chip px-4 py-2 rounded-full font-label-sm text-label-sm transition-all bg-primary text-on-primary shadow-sm';
+        activeTypeFilter = chip.getAttribute('data-filter') || 'all';
+        filterTransactions();
+      });
+    });
+
+    btnResetFilters?.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      if (categoryFilter) categoryFilter.value = 'all';
+      activeTypeFilter = 'all';
+      filterChips.forEach((c, idx) => {
+        if (idx === 0) {
+          c.className = 'filter-chip px-4 py-2 rounded-full font-label-sm text-label-sm transition-all bg-primary text-on-primary shadow-sm';
+        } else {
+          c.className = 'filter-chip px-4 py-2 rounded-full font-label-sm text-label-sm transition-all bg-surface-container-low text-on-surface-variant hover:bg-surface-container';
+        }
+      });
+      filterTransactions();
+    });
+
+    // CSV Export Mock
+    btnExportCsv?.addEventListener('click', () => {
+      const rows = [
+        ['Date', 'Merchant', 'Category', 'Account', 'Amount', 'Type']
+      ];
+      document.querySelectorAll('.tx-card').forEach((card) => {
+        rows.push([
+          '2024-10',
+          card.getAttribute('data-merchant'),
+          card.getAttribute('data-category'),
+          'Primary',
+          card.getAttribute('data-amount'),
+          card.getAttribute('data-type')
+        ]);
+      });
+      const csvContent = 'data:text/csv;charset=utf-8,' + rows.map(e => e.join(',')).join('\n');
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', 'pocketwise_transactions_export.csv');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+
+    // Load More simulation
+    btnLoadMore?.addEventListener('click', () => {
+      btnLoadMore.textContent = 'All caught up for October';
+      btnLoadMore.setAttribute('disabled', 'true');
+      btnLoadMore.classList.add('opacity-60', 'cursor-not-allowed');
+    });
+
+    // Load saved transactions for the signed-in user
+    (async function loadSaved() {
+      const sb = window.__pwSupabase;
+      if (!sb) return;
+      const { data: userData } = await sb.auth.getUser();
+      if (!userData?.user) { renderBalance(); renderStats(); filterTransactions(); return; }
+      const { data, error } = await sb.from('transactions')
+        .select('type, amount, merchant, category, account, notes, occurred_on')
+        .order('occurred_on', { ascending: false })
+        .order('created_at', { ascending: false });
+      if (error) { showToast('Could not load saved transactions: ' + error.message, true); return; }
+      const frag = document.createDocumentFragment();
+      let net = 0;
+      (data || []).forEach((tx) => {
+        const isIncome = tx.type === 'income';
+        const amountVal = Number(tx.amount);
+        net += isIncome ? amountVal : -amountVal;
+        txList.push({ isIncome, amount: amountVal, date: tx.occurred_on, account: tx.account || '' });
+        frag.appendChild(buildCard({ isIncome, amountVal, merchant: tx.merchant, category: tx.category,
+          account: tx.account || '', notes: tx.notes || '', dateVal: tx.occurred_on }));
+      });
+      transactionsContainer.prepend(frag);
+      currentBalance += net;
+      renderBalance();
+      renderStats();
+      filterTransactions();
+    })();
+  })();

@@ -1,0 +1,190 @@
+
+  (function initAuthModule() {
+    const tabSignIn = document.getElementById('tabSignIn');
+    const tabSignUp = document.getElementById('tabSignUp');
+    const signInForm = document.getElementById('signInForm');
+    const signUpForm = document.getElementById('signUpForm');
+    const portalHeading = document.getElementById('portalHeading');
+    const portalSubheading = document.getElementById('portalSubheading');
+    
+    // Toggle between Sign In & Sign Up tabs
+    tabSignIn.addEventListener('click', () => {
+      tabSignIn.classList.add('bg-primary', 'text-on-primary', 'shadow-sm');
+      tabSignIn.classList.remove('text-on-surface-variant');
+      tabSignUp.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm');
+      tabSignUp.classList.add('text-on-surface-variant');
+      
+      signInForm.classList.remove('hidden');
+      signUpForm.classList.add('hidden');
+      portalHeading.textContent = 'Welcome back to PocketWise';
+      portalSubheading.textContent = 'Access your aggregated financial portfolio and smart analytics.';
+    });
+
+    tabSignUp.addEventListener('click', () => {
+      tabSignUp.classList.add('bg-primary', 'text-on-primary', 'shadow-sm');
+      tabSignUp.classList.remove('text-on-surface-variant');
+      tabSignIn.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm');
+      tabSignIn.classList.add('text-on-surface-variant');
+      
+      signUpForm.classList.remove('hidden');
+      signInForm.classList.add('hidden');
+      portalHeading.textContent = 'Join PocketWise today';
+      portalSubheading.textContent = 'Experience unified budgeting, automated categorization, and calm control.';
+    });
+
+    // Password visibility toggles
+    const setupPasswordToggle = (btnId, inputId) => {
+      const btn = document.getElementById(btnId);
+      const input = document.getElementById(inputId);
+      if (!btn || !input) return;
+      btn.addEventListener('click', () => {
+        const isPassword = input.type === 'password';
+        input.type = isPassword ? 'text' : 'password';
+        const icon = btn.querySelector('.material-symbols-outlined');
+        if (icon) {
+          icon.textContent = isPassword ? 'visibility_off' : 'visibility';
+        }
+      });
+    };
+    setupPasswordToggle('btnToggleSigninPassword', 'signinPassword');
+    setupPasswordToggle('btnToggleSignupPassword', 'signupPassword');
+
+    // Password strength indicator dynamic logic
+    const signupPassInput = document.getElementById('signupPassword');
+    const strengthLabel = document.getElementById('strengthLabel');
+    const bar1 = document.getElementById('bar1');
+    const bar2 = document.getElementById('bar2');
+    const bar3 = document.getElementById('bar3');
+
+    if (signupPassInput) {
+      signupPassInput.addEventListener('input', (e) => {
+        const val = e.target.value;
+        if (val.length === 0) {
+          strengthLabel.textContent = 'Weak (minimum 8 chars)';
+          strengthLabel.className = 'font-semibold text-error';
+          bar1.className = 'h-full rounded-full bg-error transition-all';
+          bar2.className = 'h-full rounded-full bg-surface-container-highest transition-all';
+          bar3.className = 'h-full rounded-full bg-surface-container-highest transition-all';
+        } else if (val.length < 8) {
+          strengthLabel.textContent = 'Weak';
+          strengthLabel.className = 'font-semibold text-error';
+          bar1.className = 'h-full rounded-full bg-error transition-all';
+          bar2.className = 'h-full rounded-full bg-surface-container-highest transition-all';
+          bar3.className = 'h-full rounded-full bg-surface-container-highest transition-all';
+        } else if (val.length < 12 || !/[0-9!@#$%^&*]/.test(val)) {
+          strengthLabel.textContent = 'Good (add symbols & digits)';
+          strengthLabel.className = 'font-semibold text-[#F59E0B]';
+          bar1.className = 'h-full rounded-full bg-[#F59E0B] transition-all';
+          bar2.className = 'h-full rounded-full bg-[#F59E0B] transition-all';
+          bar3.className = 'h-full rounded-full bg-surface-container-highest transition-all';
+        } else {
+          strengthLabel.textContent = 'Strong (Cryptographically Sound)';
+          strengthLabel.className = 'font-semibold text-secondary';
+          bar1.className = 'h-full rounded-full bg-secondary transition-all';
+          bar2.className = 'h-full rounded-full bg-secondary transition-all';
+          bar3.className = 'h-full rounded-full bg-secondary transition-all';
+        }
+      });
+    }
+
+    // Toast helper
+    const showToast = (message, icon = 'check_circle') => {
+      const toast = document.getElementById('authToast');
+      const toastMsg = document.getElementById('toastMessage');
+      const toastIcon = document.getElementById('toastIcon');
+      if (!toast || !toastMsg) return;
+      toastMsg.textContent = message;
+      if (toastIcon) toastIcon.textContent = icon;
+      toast.classList.remove('hidden');
+      toast.classList.add('flex');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+        toast.classList.remove('flex');
+      }, 4000);
+    };
+
+    // Google OAuth Simulated Modal
+    const oauthModal = document.getElementById('oauthModal');
+    const btnGoogleAuth = document.getElementById('btnGoogleAuth');
+    const closeOauthModal = document.getElementById('closeOauthModal');
+    const cancelOauthModal = document.getElementById('cancelOauthModal');
+    const confirmOauthModal = document.getElementById('confirmOauthModal');
+
+    const openOauth = () => {
+      oauthModal.classList.remove('hidden');
+      oauthModal.classList.add('flex');
+    };
+    const closeOauth = () => {
+      oauthModal.classList.add('hidden');
+      oauthModal.classList.remove('flex');
+    };
+
+    if (btnGoogleAuth) btnGoogleAuth.addEventListener('click', openOauth);
+    if (closeOauthModal) closeOauthModal.addEventListener('click', closeOauth);
+    if (cancelOauthModal) cancelOauthModal.addEventListener('click', closeOauth);
+    if (confirmOauthModal) {
+      confirmOauthModal.addEventListener('click', () => {
+        closeOauth();
+        showToast('Authorized with Google SSO. Redirecting to vault...');
+      });
+    }
+
+    // Apple ID Button
+    const btnApple = document.getElementById('btnAppleAuth');
+    if (btnApple) {
+      btnApple.addEventListener('click', () => {
+        showToast('Simulating Apple Passkey Biometric Handshake...', 'fingerprint');
+      });
+    }
+
+    // Forgot Password Trigger
+    const btnForgot = document.getElementById('btnForgotPass');
+    if (btnForgot) {
+      btnForgot.addEventListener('click', () => {
+        showToast('Recovery link sent to your registered address.', 'mark_email_read');
+      });
+    }
+
+    // Form handlers
+    window.handleSignInSubmit = async () => {
+      const sb = window.__pwSupabase;
+      const btn = document.getElementById('btnSignInSubmit');
+      btn.innerHTML = `<span class="material-symbols-outlined text-[18px] animate-spin">progress_activity</span><span>Verifying credentials...</span>`;
+      const { error } = await sb.auth.signInWithPassword({
+        email: document.getElementById('signinEmail').value.trim(),
+        password: document.getElementById('signinPassword').value,
+      });
+      btn.innerHTML = `<span>Log In to PocketWise</span><span class="material-symbols-outlined text-[18px]">arrow_forward</span>`;
+      if (error) { showToast(error.message, 'error'); return; }
+      showToast('Authentication complete. Welcome back!');
+      setTimeout(()=>window.__pwNavigate&&window.__pwNavigate('/wallet'),900);
+    };
+
+    window.handleSignUpSubmit = async () => {
+      const pass = document.getElementById('signupPassword').value;
+      const confirm = document.getElementById('signupConfirmPassword').value;
+      if (pass !== confirm) {
+        showToast('Passwords do not match. Please verify.', 'error');
+        return;
+      }
+      const sb = window.__pwSupabase;
+      const btn = document.getElementById('btnSignUpSubmit');
+      btn.innerHTML = `<span class="material-symbols-outlined text-[18px] animate-spin">progress_activity</span><span>Securing Vault...</span>`;
+      const { data, error } = await sb.auth.signUp({
+        email: document.getElementById('signupEmail').value.trim(),
+        password: pass,
+        options: {
+          emailRedirectTo: window.location.origin + '/wallet',
+          data: { full_name: document.getElementById('signupFullName').value.trim() },
+        },
+      });
+      btn.innerHTML = `<span>Create Free Account</span><span class="material-symbols-outlined text-[18px]">bolt</span>`;
+      if (error) { showToast(error.message, 'error'); return; }
+      if (data.session) {
+        showToast('Account created! Redirecting...');
+        setTimeout(()=>window.__pwNavigate&&window.__pwNavigate('/wallet'),900);
+      } else {
+        showToast('Account initialized! Check your email to verify.');
+      }
+    };
+  })();

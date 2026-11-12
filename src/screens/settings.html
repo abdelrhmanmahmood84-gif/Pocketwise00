@@ -1,0 +1,608 @@
+<header class="fixed top-0 left-0 right-0 z-40 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-7xl mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><img alt="PocketWise Logo" class="h-8 w-auto object-contain" src="/pocketwise-logo.png"/><span class="font-title-md text-title-md text-primary tracking-tight">PocketWise</span></div><div class="flex items-center gap-space-md"><div class="hidden sm:flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm"><span class="w-2 h-2 rounded-full bg-secondary"></span><span>USD ($)</span></div><button aria-label="Notifications" class="relative p-space-xs rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full ring-2 ring-surface"></span></button><div class="flex items-center gap-space-sm pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq4xvczIL631WAGv2WlmT4eq-zi8Cf7EjhFjKFxj_sXepZVIRhR7czqPvyUuHOU_ahMemqPPdpGhxGoYi-WT1boXLV2wQlYs2tNkc2AVIVC6WLkv_B6U2EAfkvmGhYLAmkSM-R0-mPeoJyXbU--0zLMbdRmzHvRN88SIGHj8VCUXUZ12TS9sLfkFwiBfcuKYuxbDhBn1SpC900QLgK5PBVjHeU3DGyVfbMDaa5L1QM"/></div></div></div></header><main class="w-full pt-16 pb-28 min-h-screen bg-surface"><div class="flex flex-col w-full">
+<!-- Notifications & Toast Anchor -->
+<div class="fixed top-20 right-6 z-50 flex flex-col gap-2 pointer-events-none" id="toast-container"></div>
+<!-- Content Container -->
+<div class="max-w-7xl mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop py-space-lg w-full">
+<!-- Top Contextual Strip -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-xl">
+<div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm mb-1">
+<span>Account</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-medium">Preferences &amp; Governance</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">System Settings</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Manage personal parameters, fiscal boundaries, identity protection, and ledger exports.</p>
+</div>
+<!-- Quick Action Save Bar Sync Badge -->
+<div class="flex items-center gap-space-sm bg-surface-container-lowest px-space-md py-2.5 rounded-full shadow-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-on-surface">Cloud Vault Synchronized</span>
+<span class="text-outline-variant font-body-sm text-body-sm">|</span>
+<span class="font-mono text-body-sm text-on-surface-variant text-[11px]">v4.8.2-prod</span>
+</div>
+</div>
+<!-- Main Settings Architecture: Side Anchor Navigation + Cards Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- Sticky Navigation Bar (Left Column) -->
+<div class="lg:col-span-3 sticky top-20">
+<div class="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm space-y-1">
+<div class="px-space-sm py-2 text-on-surface-variant font-label-xs text-label-xs uppercase tracking-wider">
+            Navigation Jump
+          </div>
+<a class="settings-nav-item flex items-center justify-between px-space-md py-2.5 rounded-xl font-label-md text-label-md text-on-surface bg-surface-container hover:bg-surface-container-high transition-colors" href="#profile-section">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[20px] text-primary">person</span>
+<span>Profile</span>
+</div>
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+</a>
+<a class="settings-nav-item flex items-center justify-between px-space-md py-2.5 rounded-xl font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors" href="#preferences-section">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+<span>Preferences</span>
+</div>
+</a>
+<a class="settings-nav-item flex items-center justify-between px-space-md py-2.5 rounded-xl font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors" href="#financial-section">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+<span>Financial Rules</span>
+</div>
+</a>
+<a class="settings-nav-item flex items-center justify-between px-space-md py-2.5 rounded-xl font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors" href="#security-section">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[20px]">security</span>
+<span>Security &amp; 2FA</span>
+</div>
+</a>
+<a class="settings-nav-item flex items-center justify-between px-space-md py-2.5 rounded-xl font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors" href="#data-section">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[20px]">cloud_download</span>
+<span>Data &amp; Privacy</span>
+</div>
+</a>
+<div class="pt-space-md mt-space-md">
+<div class="p-space-sm rounded-xl bg-surface-container-low">
+<div class="flex items-center gap-space-xs text-secondary mb-1">
+<span class="material-symbols-outlined text-[16px]">verified_user</span>
+<span class="font-label-xs text-label-xs font-semibold">Tier 1 Sovereign Plan</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-[11px] leading-tight">Next renewal: Oct 14, 2025. Standard enterprise encryption enabled.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Settings Cards Stream (Right Column) -->
+<div class="lg:col-span-9 space-y-space-xl">
+<!-- SECTION 1: PROFILE -->
+<section class="scroll-mt-24" id="profile-section">
+<div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm relative overflow-hidden">
+<div class="flex items-start justify-between pb-space-md">
+<div>
+<span class="font-label-xs text-label-xs text-on-surface-variant tracking-wider uppercase">Identity Matrix</span>
+<h2 class="font-headline-md text-headline-md text-primary mt-0.5">Profile Information</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">Personal credentials shown on ledger notes and recurring transfer summaries.</p>
+</div>
+<span class="material-symbols-outlined text-[28px] text-surface-tint">badge</span>
+</div>
+<!-- Avatar & Upload Zone -->
+<div class="py-space-md flex flex-col sm:flex-row items-center sm:items-start gap-space-lg bg-surface-container-low p-space-md rounded-xl my-space-md">
+<div class="relative">
+<img class="w-24 h-24 rounded-full object-cover shadow-sm ring-4 ring-surface-container-lowest" data-alt="Portrait photo of Alex Mercer, a composed financial analyst in his early thirties with neat styling, soft daylight studio lighting, wearing a navy minimalist sweater against a clean neutral backdrop" id="profile-avatar-preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPDErPa1D0uMvHV-FIQu5MhLgKn0Y5b0q7jPRylas_PrcWSV_M6Z7FYj1VJF-8oHuCM4tyTz9TiZulNsN4QvQD5qozYaXBg6jzPr7VcO2IXi24ARSWxuiqe0b1WnuARXtwDqbVdRbV7_KIt-UKYuDC0xKhX_E6NiQZUbFba7NZB90VJXe14cE1ssipiNlroZfUL8KbXk2ih-bKiQjeVe0zhf0InPiUEBUl1HXa_o-A"/>
+<span class="absolute bottom-0 right-0 w-6 h-6 rounded-full bg-secondary flex items-center justify-center text-on-secondary text-[12px] shadow-sm">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</span>
+</div>
+<div class="flex-1 flex flex-col items-center sm:items-start text-center sm:text-left">
+<span class="font-title-md text-title-md text-on-surface">Alex Mercer</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm">Personal Account Operator • ID #PW-98241</span>
+<div class="flex flex-wrap gap-space-xs justify-center sm:justify-start">
+<label class="cursor-pointer inline-flex items-center gap-space-xs px-3.5 py-1.5 rounded-xl bg-surface-container-highest hover:bg-surface-dim font-label-sm text-label-sm text-on-surface transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[16px]">upload</span>
+<span>Change Photo</span>
+<input accept="image/*" class="hidden" id="avatar-input" type="file"/>
+</label>
+<button class="inline-flex items-center gap-space-xs px-3.5 py-1.5 rounded-xl bg-surface-container hover:bg-surface-container-high font-label-sm text-label-sm text-error transition-colors" id="btn-remove-avatar" type="button">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+<span>Remove</span>
+</button>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-[11px] mt-2">Recommended size: 400x400px. PNG, JPG or WEBP under 3MB.</span>
+</div>
+</div>
+<!-- Profile Form Fields -->
+<form class="space-y-space-md pt-space-xs" id="profile-form" onsubmit="event.preventDefault(); window.saveProfile();">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface mb-1.5" for="profile-name">Full Name</label>
+<div class="relative">
+<input class="w-full h-12 px-space-md rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none focus:bg-surface-container-lowest focus:shadow-md transition-all" id="profile-name" type="text" value="Alex Mercer"/>
+<span class="material-symbols-outlined absolute right-3.5 top-3 text-[18px] text-outline">person_outline</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-[11px] mt-1">Legal name utilized for tax statements and reconciliation reports.</p>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface mb-1.5" for="profile-email">Primary Email</label>
+<div class="relative">
+<input class="w-full h-12 px-space-md rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none focus:bg-surface-container-lowest focus:shadow-md transition-all" id="profile-email" type="email" value="alex.mercer@pocketwise.finance"/>
+<span class="material-symbols-outlined absolute right-3.5 top-3 text-[18px] text-secondary">verified</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-[11px] mt-1">Verified for two-factor login challenges and receipt digests.</p>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface mb-1.5" for="profile-phone">Phone Number</label>
+<div class="relative">
+<input class="w-full h-12 px-space-md rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none focus:bg-surface-container-lowest focus:shadow-md transition-all" id="profile-phone" type="tel" value="+1 (555) 782-9904"/>
+<span class="material-symbols-outlined absolute right-3.5 top-3 text-[18px] text-outline">call</span>
+</div>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface mb-1.5" for="profile-occupation">Tax Residency / Jurisdiction</label>
+<div class="relative">
+<select class="w-full h-12 px-space-md rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none cursor-pointer" id="profile-occupation">
+<option selected="">United States (Federal / CA)</option>
+<option>United Kingdom (HMRC)</option>
+<option>European Union (Germany)</option>
+<option>Egypt (ETA Verified)</option>
+</select>
+</div>
+</div>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface mb-1.5" for="profile-bio">Personal Memo / Bio</label>
+<textarea class="w-full p-space-md rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none focus:shadow-md transition-all resize-none" id="profile-bio" placeholder="Brief notes for multi-seat household account members..." rows="2">Senior Product Lead managing household operational runway and liquid growth funds.</textarea>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-sm text-label-sm text-secondary hidden" id="profile-status-msg">
+<span class="inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+                    Profile updated successfully.
+                  </span>
+</span>
+<button class="ml-auto inline-flex items-center gap-space-xs px-6 py-3 rounded-xl bg-primary-container text-on-primary font-label-md text-label-md shadow-sm hover:brightness-110 active:scale-[0.98] transition-all" type="submit">
+<span class="material-symbols-outlined text-[18px]">save</span>
+<span>Save Profile Changes</span>
+</button>
+</div>
+</form>
+</div>
+</section>
+<!-- SECTION 2: PREFERENCES -->
+<section class="scroll-mt-24" id="preferences-section">
+<div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm space-y-space-lg">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-xs text-label-xs text-on-surface-variant tracking-wider uppercase">Localization &amp; Interface</span>
+<h2 class="font-headline-md text-headline-md text-primary mt-0.5">Preferences</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">Configure rendering units, linguistic tokens, and visual display palettes.</p>
+</div>
+<span class="material-symbols-outlined text-[28px] text-surface-tint">tune</span>
+</div>
+<!-- Currency & Language Dual Selector -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="p-space-md rounded-xl bg-surface-container-low">
+<label class="block font-label-sm text-label-sm text-on-surface mb-1" for="currency-selector">Base Currency</label>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm">Applied as primary denomination for calculations.</p>
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-xl bg-primary text-on-primary flex items-center justify-center font-headline-md text-headline-md shadow-sm" id="currency-symbol-display">
+                    $
+                  </div>
+<select class="flex-1 h-12 px-space-md rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none cursor-pointer" id="currency-selector" onchange="window.updateCurrencyBadge(this.value)">
+<option selected="" value="USD">USD — United States Dollar ($)</option>
+<option value="EUR">EUR — Euro (€)</option>
+<option value="GBP">GBP — British Pound Sterling (£)</option>
+<option value="EGP">EGP — Egyptian Pound (E£ / ج.م)</option>
+</select>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low">
+<label class="block font-label-sm text-label-sm text-on-surface mb-1" for="language-selector">Interface Language</label>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm">Select language for interface labels and exports.</p>
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest text-on-surface flex items-center justify-center font-label-md text-label-md shadow-sm">
+<span class="material-symbols-outlined text-[22px]">translate</span>
+</div>
+<select class="flex-1 h-12 px-space-md rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none cursor-pointer" id="language-selector">
+<option selected="" value="en">English (United States)</option>
+<option value="es">Español (Castellano)</option>
+<option value="fr">Français (France)</option>
+<option value="de">Deutsch (Standard)</option>
+<option value="ar">العربية (Arabic - RTL)</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Appearance Theme Switcher -->
+<div class="p-space-md rounded-xl bg-surface-container-low">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm mb-space-md">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface">Color Palette &amp; Theme</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">PocketWise delivers high visual contrast for data density.</p>
+</div>
+<span class="px-space-sm py-1 rounded-full bg-surface-container font-label-xs text-label-xs text-on-surface-variant">Active: Solar Light</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<!-- Light Theme Option Card -->
+<button class="p-space-md rounded-xl text-left bg-surface-container-lowest shadow-md flex items-start gap-space-md transition-all" id="theme-light-card" onclick="window.selectTheme('light')" type="button">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">light_mode</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface">Light Surface</span>
+<span class="material-symbols-outlined text-[20px] text-primary" id="light-check">check_circle</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-[12px] mt-0.5">Airy canvas with optimal daylight legibility and crisp charts.</p>
+</div>
+</button>
+<!-- Dark Theme Option Card -->
+<button class="p-space-md rounded-xl text-left bg-surface-container-lowest shadow-sm opacity-80 hover:opacity-100 flex items-start gap-space-md transition-all" id="theme-dark-card" onclick="window.selectTheme('dark')" type="button">
+<div class="w-10 h-10 rounded-lg bg-primary text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">dark_mode</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface">Nocturne Dark</span>
+<span class="material-symbols-outlined text-[20px] text-outline-variant hidden" id="dark-check">check_circle</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-[12px] mt-0.5">High contrast deep navy slate for dim ambient light.</p>
+</div>
+</button>
+</div>
+</div>
+<!-- Calendar & Regional Formatting -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface mb-1.5" for="date-format">Date Display Format</label>
+<select class="w-full h-12 px-space-md rounded-xl bg-surface-container-low text-on-surface font-body-md text-body-md shadow-sm outline-none cursor-pointer" id="date-format">
+<option selected="">MM/DD/YYYY (e.g. 10/24/2025)</option>
+<option>DD/MM/YYYY (e.g. 24/10/2025)</option>
+<option>YYYY-MM-DD (ISO 8601 e.g. 2025-10-24)</option>
+</select>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface mb-1.5" for="week-start">Start Day of Week</label>
+<select class="w-full h-12 px-space-md rounded-xl bg-surface-container-low text-on-surface font-body-md text-body-md shadow-sm outline-none cursor-pointer" id="week-start">
+<option selected="">Monday (Standard Financial)</option>
+<option>Sunday (Traditional US / Middle East)</option>
+<option>Saturday (Regional Banking Cycle)</option>
+</select>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: FINANCIAL PREFERENCES -->
+<section class="scroll-mt-24" id="financial-section">
+<div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm space-y-space-lg">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-xs text-label-xs text-on-surface-variant tracking-wider uppercase">Algorithmic Guardrails</span>
+<h2 class="font-headline-md text-headline-md text-primary mt-0.5">Financial Preferences</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">Pacing velocity thresholds, target liquidity, and push alert triggers.</p>
+</div>
+<span class="material-symbols-outlined text-[28px] text-surface-tint">account_balance_wallet</span>
+</div>
+<!-- Monthly Budget & Default Ledger -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="p-space-md rounded-xl bg-surface-container-low">
+<label class="block font-label-sm text-label-sm text-on-surface mb-1" for="monthly-budget-input">Target Monthly Expenditure Cap</label>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-[12px] mb-space-sm">Resets on the 1st of every month automatically.</p>
+<div class="relative">
+<span class="absolute left-3.5 top-3 font-title-md text-title-md text-on-surface-variant">$</span>
+<input class="w-full h-12 pl-8 pr-space-md rounded-xl bg-surface-container-lowest text-on-surface font-title-md text-title-md shadow-sm outline-none" id="monthly-budget-input" type="text" value="3,500.00"/>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low">
+<label class="block font-label-sm text-label-sm text-on-surface mb-1" for="default-account-select">Primary Settlement Account</label>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-[12px] mb-space-sm">Default ledger selected during quick expense capture.</p>
+<select class="w-full h-12 px-space-md rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none cursor-pointer" id="default-account-select">
+<option selected="">Main Checking (Chase Platinum • 8812)</option>
+<option>High Yield Savings (Marcus Goldman Sachs • 4109)</option>
+<option>Physical Cash Vault (Petty Cash Reserve)</option>
+<option>Revolving Credit (Amex Gold • 0021)</option>
+</select>
+</div>
+</div>
+<!-- Spending Velocity Alert Threshold Slider -->
+<div class="p-space-md rounded-xl bg-surface-container-low">
+<div class="flex items-center justify-between mb-2">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface">Budget Alert Threshold</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-[12px]">Trigger critical notice when cumulative spend breaches this marker.</p>
+</div>
+<div class="px-space-md py-1 rounded-full bg-primary text-on-primary font-title-md text-title-md">
+<span id="slider-val-badge">90</span>%
+                </div>
+</div>
+<div class="pt-2 pb-1">
+<input class="w-full h-2 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary" id="threshold-range" max="100" min="50" oninput="window.updateThreshold(this.value)" step="5" type="range" value="90"/>
+<div class="flex justify-between font-label-xs text-label-xs text-on-surface-variant mt-2 px-1">
+<span>50% (Ultra Conservative)</span>
+<span class="font-medium text-on-surface">80%</span>
+<span class="font-bold text-primary">90% (Recommended)</span>
+<span>100% (Ceiling)</span>
+</div>
+</div>
+</div>
+<!-- Granular Push & Digest Toggles -->
+<div class="space-y-space-sm">
+<span class="font-label-sm text-label-sm text-on-surface block">Automated Dispatch Signals</span>
+<!-- Toggle 1 -->
+<div class="flex items-center justify-between p-space-md rounded-xl bg-surface-container-low">
+<div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[22px] text-surface-tint mt-0.5">mark_email_read</span>
+<div>
+<span class="font-label-md text-label-md text-on-surface block">Daily spending summary email</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-[12px]">Dispatched at 21:00 UTC summarizing today's balance delta.</span>
+</div>
+</div>
+<button class="w-12 h-6 rounded-full bg-primary-container p-0.5 transition-colors relative focus:outline-none" onclick="window.toggleSwitch(this)" type="button">
+<span class="block w-5 h-5 rounded-full bg-on-primary transition-transform translate-x-6"></span>
+</button>
+</div>
+<!-- Toggle 2 -->
+<div class="flex items-center justify-between p-space-md rounded-xl bg-surface-container-low">
+<div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[22px] text-surface-tint mt-0.5">notifications_active</span>
+<div>
+<span class="font-label-md text-label-md text-on-surface block">Instant over-budget push notifications</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-[12px]">Immediate alert on mobile shell if any single entry exhausts threshold.</span>
+</div>
+</div>
+<button class="w-12 h-6 rounded-full bg-primary-container p-0.5 transition-colors relative focus:outline-none" onclick="window.toggleSwitch(this)" type="button">
+<span class="block w-5 h-5 rounded-full bg-on-primary transition-transform translate-x-6"></span>
+</button>
+</div>
+<!-- Toggle 3 -->
+<div class="flex items-center justify-between p-space-md rounded-xl bg-surface-container-low">
+<div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[22px] text-surface-tint mt-0.5">history_toggle_off</span>
+<div>
+<span class="font-label-md text-label-md text-on-surface block">Unusual recurring charge alerts</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-[12px]">AI detection flag when subscription fees jump more than 10%.</span>
+</div>
+</div>
+<button class="w-12 h-6 rounded-full bg-primary-container p-0.5 transition-colors relative focus:outline-none" onclick="window.toggleSwitch(this)" type="button">
+<span class="block w-5 h-5 rounded-full bg-on-primary transition-transform translate-x-6"></span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 4: SECURITY -->
+<section class="scroll-mt-24" id="security-section">
+<div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm space-y-space-lg">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-xs text-label-xs text-on-surface-variant tracking-wider uppercase">Vault &amp; Encryption</span>
+<h2 class="font-headline-md text-headline-md text-primary mt-0.5">Security &amp; Sessions</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">Control access credentials, external authorization tokens, and active hardware keys.</p>
+</div>
+<span class="material-symbols-outlined text-[28px] text-surface-tint">security</span>
+</div>
+<!-- Two-Factor Authentication Status Card -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col sm:flex-row sm:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-sm">
+<div class="w-11 h-11 rounded-xl bg-secondary/15 text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">phonelink_lock</span>
+</div>
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-title-md text-title-md text-on-surface">Two-Factor Authentication (2FA)</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-secondary/15 text-secondary font-label-xs text-label-xs font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                      Enabled
+                    </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Secured via Authenticator App (TOTP • 6 digits).</p>
+</div>
+</div>
+<button class="px-space-md py-2 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors" onclick="window.showToast('2FA settings key regenerated.')" type="button">
+                Configure TOTP
+              </button>
+</div>
+<!-- Change Password Grid -->
+<form class="space-y-space-md p-space-md rounded-xl bg-surface-container-low" id="password-form" onsubmit="event.preventDefault(); window.changePassword();">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface">Update Master Passphrase</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-[12px]">Last updated 42 days ago</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-sm">
+<div>
+<label class="block font-label-xs text-label-xs text-on-surface-variant mb-1" for="curr-pass">Current Password</label>
+<input class="w-full h-11 px-space-md rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none" id="curr-pass" placeholder="••••••••••••" type="password"/>
+</div>
+<div>
+<label class="block font-label-xs text-label-xs text-on-surface-variant mb-1" for="new-pass">New Password</label>
+<input class="w-full h-11 px-space-md rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none" id="new-pass" placeholder="Min. 12 characters" type="password"/>
+</div>
+<div>
+<label class="block font-label-xs text-label-xs text-on-surface-variant mb-1" for="conf-pass">Confirm New Password</label>
+<input class="w-full h-11 px-space-md rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none" id="conf-pass" placeholder="Re-type new passphrase" type="password"/>
+</div>
+</div>
+<div class="flex items-center justify-end">
+<button class="px-space-md py-2 rounded-xl bg-primary text-on-primary font-label-sm text-label-sm hover:brightness-110 transition-all shadow-sm" type="submit">
+                  Update Passphrase
+                </button>
+</div>
+</form>
+<!-- SSO Federated Logins -->
+<div class="p-space-md rounded-xl bg-surface-container-low">
+<span class="font-label-sm text-label-sm text-on-surface block mb-space-xs">Federated Identity Providers</span>
+<div class="flex items-center justify-between py-2">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-surface-container-lowest flex items-center justify-center shadow-sm">
+<svg class="w-5 h-5" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"></path>
+</svg>
+</div>
+<div>
+<span class="font-label-md text-label-md text-on-surface block">Google Identity Services</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-[12px]">Connected as alex.mercer@gmail.com</span>
+</div>
+</div>
+<button class="px-3.5 py-1.5 rounded-xl bg-surface-container-highest hover:bg-error-container hover:text-error text-on-surface font-label-sm text-label-sm transition-colors" onclick="window.disconnectGoogle(this)" type="button">
+                  Disconnect
+                </button>
+</div>
+</div>
+<!-- Active Sessions List -->
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between pb-1">
+<span class="font-label-sm text-label-sm text-on-surface">Recognized Hardware Sessions</span>
+<button class="font-label-xs text-label-xs text-error hover:underline" onclick="window.revokeOtherSessions()" type="button">Revoke All Others</button>
+</div>
+<!-- Session 1 -->
+<div class="flex items-center justify-between p-space-md rounded-xl bg-surface-container-low">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[24px] text-secondary">laptop_mac</span>
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-md text-label-md text-on-surface">MacBook Pro 16" • Chrome 129</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary/15 text-secondary font-label-xs text-label-xs font-semibold">This Device</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-[11px]">San Francisco, CA, USA • IP: 198.51.100.24 • Active now</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary text-[20px]">check_circle</span>
+</div>
+<!-- Session 2 -->
+<div class="flex items-center justify-between p-space-md rounded-xl bg-surface-container-low" id="session-iphone">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[24px] text-outline">phone_iphone</span>
+<div>
+<span class="font-label-md text-label-md text-on-surface block">iPhone 15 Pro • PocketWise iOS App</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-[11px]">San Francisco, CA, USA • IP: 198.51.100.82 • Active 2h ago</span>
+</div>
+</div>
+<button class="px-3 py-1 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-xs text-label-xs transition-colors" onclick="window.revokeSession('session-iphone')" type="button">
+                  Revoke
+                </button>
+</div>
+</div>
+<!-- Sign Out Secondary Trigger -->
+<div class="pt-space-xs flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Sign out of this browser terminal securely.</span>
+<button class="px-space-md py-2.5 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors flex items-center gap-space-xs" onclick="window.showToast('You have been logged out securely.')" type="button">
+<span class="material-symbols-outlined text-[18px]">logout</span>
+<span>Sign Out of PocketWise</span>
+</button>
+</div>
+</div>
+</section>
+<!-- SECTION 5: DATA MANAGEMENT & COMPLIANCE -->
+<section class="scroll-mt-24" id="data-section">
+<div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm space-y-space-lg">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-xs text-label-xs text-on-surface-variant tracking-wider uppercase">Governance &amp; Extraction</span>
+<h2 class="font-headline-md text-headline-md text-primary mt-0.5">Data Management</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">Export structured tabular histories, compile financial statements, or purge data.</p>
+</div>
+<span class="material-symbols-outlined text-[28px] text-surface-tint">cloud_download</span>
+</div>
+<!-- Dual Export Modules -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- CSV Export Module -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-space-xs text-primary mb-1">
+<span class="material-symbols-outlined text-[20px]">table_view</span>
+<span class="font-title-md text-title-md">Export Transactions (CSV)</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">Raw ledger records, category IDs, tags, and transaction metadata formatted for Excel or QuickBooks.</p>
+<div class="space-y-2 mb-space-md">
+<div>
+<label class="block font-label-xs text-label-xs text-on-surface-variant mb-1" for="csv-date-range">Timeline Scope</label>
+<select class="w-full h-10 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-sm text-body-sm shadow-sm outline-none" id="csv-date-range">
+<option>Current Fiscal Year (2025 to Date)</option>
+<option>Past 90 Days</option>
+<option>Full Historical Archive (All Time)</option>
+</select>
+</div>
+</div>
+</div>
+<button class="w-full h-11 rounded-xl bg-surface-container-highest hover:bg-surface-dim text-on-surface font-label-sm text-label-sm flex items-center justify-center gap-space-xs transition-colors shadow-sm" onclick="window.triggerDownload('transactions_export_2025.csv')" type="button">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Generate CSV File</span>
+</button>
+</div>
+<!-- PDF Monthly Statement Module -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-space-xs text-primary mb-1">
+<span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+<span class="font-title-md text-title-md">Financial Report (PDF)</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">Audited PDF statement including category donut breakdowns, net flow graphs, and variance notes.</p>
+<div class="space-y-2 mb-space-md">
+<div>
+<label class="block font-label-xs text-label-xs text-on-surface-variant mb-1" for="pdf-month-range">Statement Period</label>
+<select class="w-full h-10 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-sm text-body-sm shadow-sm outline-none" id="pdf-month-range">
+<option>September 2025 (Closed Ledger)</option>
+<option>August 2025 (Closed Ledger)</option>
+<option>Q3 Comprehensive Summary (July - Sept)</option>
+</select>
+</div>
+</div>
+</div>
+<button class="w-full h-11 rounded-xl bg-surface-container-highest hover:bg-surface-dim text-on-surface font-label-sm text-label-sm flex items-center justify-center gap-space-xs transition-colors shadow-sm" onclick="window.triggerDownload('PocketWise_Statement_Sept2025.pdf')" type="button">
+<span class="material-symbols-outlined text-[18px]">summarize</span>
+<span>Download PDF Statement</span>
+</button>
+</div>
+</div>
+<!-- Danger Zone Card -->
+<div class="p-space-lg rounded-2xl bg-error-container/30 border-0 flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-error/15 text-error flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[28px]">warning</span>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-error">Delete PocketWise Account</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-xl mt-0.5">
+                    Permanently delete your personal profile, cryptographic vault keys, connected bank accounts, and immutable transaction histories. This action is irreversible.
+                  </p>
+</div>
+</div>
+<button class="px-space-lg py-3 rounded-xl bg-error text-on-error font-label-md text-label-md hover:brightness-110 active:scale-[0.98] transition-all whitespace-nowrap shadow-sm" onclick="window.openDeleteModal()" type="button">
+                Delete Account
+              </button>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+<!-- MODAL: Permanent Account Deletion -->
+<div class="fixed inset-0 z-50 bg-on-background/40 backdrop-blur-sm hidden flex items-center justify-center p-4" id="delete-modal">
+<div class="bg-surface-container-lowest rounded-2xl max-w-lg w-full p-space-lg shadow-xl relative animate-in fade-in zoom-in-95">
+<div class="flex items-center gap-space-sm text-error mb-space-sm">
+<span class="material-symbols-outlined text-[28px]">report</span>
+<h3 class="font-headline-md text-headline-md">Permanently Delete Account?</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-space-md leading-relaxed">
+        This will immediately terminate your subscription, purge <strong>Alex Mercer</strong>'s records from encrypted storage clusters, and disconnect all synced banking aggregators.
+      </p>
+<div class="p-space-md rounded-xl bg-surface-container-low mb-space-md">
+<label class="block font-label-xs text-label-xs text-on-surface mb-1" for="delete-confirmation-input">
+          Type <span class="font-bold text-error">DELETE POCKETWISE</span> to verify intent:
+        </label>
+<input class="w-full h-11 px-space-md rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none" id="delete-confirmation-input" oninput="window.validateDeleteInput(this.value)" placeholder="DELETE POCKETWISE" type="text"/>
+</div>
+<div class="flex items-center justify-end gap-space-sm">
+<button class="px-space-md py-2.5 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors" onclick="window.closeDeleteModal()" type="button">
+          Cancel
+        </button>
+<button class="px-space-md py-2.5 rounded-xl bg-error text-on-error font-label-sm text-label-sm opacity-50 cursor-not-allowed transition-all shadow-sm" disabled="" id="confirm-delete-btn" onclick="window.confirmPermanentDelete()" type="button">
+          Permanently Delete Account
+        </button>
+</div>
+</div>
+</div>
+</div>
+</main><aside class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-lg pointer-events-auto"><nav class="flex items-center justify-around bg-surface-container-lowest/95 backdrop-blur-xl border border-outline-variant/40 rounded-full px-space-sm py-space-xs shadow-[0_10px_25px_-5px_rgba(15,23,42,0.12),0_8px_10px_-6px_rgba(15,23,42,0.06)]" data-active-classes="bg-primary text-on-primary shadow-sm"><a class="flex flex-col items-center gap-0.5 px-2.5 sm:px-space-md py-1.5 rounded-full text-on-surface-variant hover:text-on-surface transition-all" data-path="home" href="#"><span class="material-symbols-outlined text-[20px]">home</span><span class="font-label-xs text-label-xs">Home</span></a><a class="flex flex-col items-center gap-0.5 px-2.5 sm:px-space-md py-1.5 rounded-full text-on-surface-variant hover:text-on-surface transition-all" data-path="account" href="#"><span class="material-symbols-outlined text-[20px]">person</span><span class="font-label-xs text-label-xs">Account</span></a><a class="flex flex-col items-center gap-0.5 px-2.5 sm:px-space-md py-1.5 rounded-full text-on-surface-variant hover:text-on-surface transition-all" data-path="wallet" href="#"><span class="material-symbols-outlined text-[20px]">account_balance_wallet</span><span class="font-label-xs text-label-xs">Wallet</span></a><a class="flex flex-col items-center gap-0.5 px-2.5 sm:px-space-md py-1.5 rounded-full text-on-surface-variant hover:text-on-surface transition-all" data-path="analysis" href="#"><span class="material-symbols-outlined text-[20px]">bar_chart</span><span class="font-label-xs text-label-xs">Analysis</span></a><a aria-current="page" class="flex flex-col items-center gap-0.5 px-2.5 sm:px-space-md py-1.5 rounded-full transition-all bg-primary text-on-primary shadow-sm" data-path="settings" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span class="font-label-xs text-label-xs">Settings</span></a></nav></aside>

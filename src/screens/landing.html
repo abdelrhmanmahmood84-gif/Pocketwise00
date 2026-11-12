@@ -1,0 +1,356 @@
+<header class="fixed top-0 left-0 right-0 z-40 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-7xl mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><img alt="PocketWise Logo" class="h-8 w-auto object-contain" src="/pocketwise-logo.png"/><span class="font-title-md text-title-md text-primary tracking-tight">PocketWise</span></div><div class="flex items-center gap-space-md"><div class="hidden sm:flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm"><span class="w-2 h-2 rounded-full bg-secondary"></span><span>USD ($)</span></div><button aria-label="Notifications" class="relative p-space-xs rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full ring-2 ring-surface"></span></button><div class="flex items-center gap-space-sm pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq4xvczIL631WAGv2WlmT4eq-zi8Cf7EjhFjKFxj_sXepZVIRhR7czqPvyUuHOU_ahMemqPPdpGhxGoYi-WT1boXLV2wQlYs2tNkc2AVIVC6WLkv_B6U2EAfkvmGhYLAmkSM-R0-mPeoJyXbU--0zLMbdRmzHvRN88SIGHj8VCUXUZ12TS9sLfkFwiBfcuKYuxbDhBn1SpC900QLgK5PBVjHeU3DGyVfbMDaa5L1QM"/></div></div></div></header><main class="w-full pt-16 pb-28 min-h-screen bg-surface"><div class="flex flex-col w-full">
+<!-- Subtle Ambient Glow -->
+<div class="relative w-full overflow-hidden">
+<div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[720px] h-[340px] bg-gradient-to-b from-primary/5 via-tertiary-fixed-dim/20 to-transparent blur-3xl pointer-events-none rounded-full"></div>
+<!-- HERO SECTION -->
+<section class="max-w-7xl mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop pt-8 pb-16 lg:pb-24 w-full">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-desktop items-center">
+<!-- Left Hero Copy -->
+<div class="lg:col-span-6 flex flex-col items-start gap-space-md">
+<!-- Eyebrow Pill -->
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm shadow-sm">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed-dim animate-pulse"></span>
+<span>✨ Smart Personal Expense Management 2.0</span>
+</div>
+<!-- Headline -->
+<h1 class="font-display-lg text-display-lg text-primary tracking-tight max-w-xl">
+            Take Control of <span class="text-tertiary-container underline decoration-secondary-fixed-dim/60 underline-offset-8">Your Money</span>.
+          </h1>
+<!-- Subtitle -->
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">
+            Track your income, manage your expenses, and build lasting financial habits with quiet confidence — all unified into one intuitive sanctuary.
+          </p>
+<!-- CTAs -->
+<div class="flex flex-wrap items-center gap-space-sm pt-2 w-full sm:w-auto">
+<a class="w-full sm:w-auto text-center px-6 py-3.5 rounded-xl bg-primary-container text-on-primary font-label-md text-label-md shadow-md hover:shadow-lg transition-all active:scale-[0.98]" data-path="account" href="#">
+              Get Started Free
+            </a>
+<a class="w-full sm:w-auto text-center px-6 py-3.5 rounded-xl bg-surface-container-lowest text-primary-container font-label-md text-label-md shadow-sm hover:bg-surface-container-low transition-all" href="#features">
+              Explore Features
+            </a>
+</div>
+<!-- KPI Stats Ticker -->
+<div class="grid grid-cols-3 gap-space-md pt-6 w-full max-w-lg">
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-primary tracking-tight font-bold">$4.2M+</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">Tracked Wealth</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-primary tracking-tight font-bold">48,000+</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">Active Stewards</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-secondary font-bold tracking-tight">99.4%</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">Budget Precision</span>
+</div>
+</div>
+</div>
+<!-- Right Hero Dashboard Visual Showcase -->
+<div class="lg:col-span-6 relative mt-6 lg:mt-0">
+<div class="relative bg-surface-container-lowest rounded-2xl shadow-xl p-space-lg w-full max-w-xl mx-auto">
+<!-- Top Balance Row -->
+<div class="flex items-start justify-between mb-space-lg">
+<div>
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-on-surface-variant">Consolidated Balance</span>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-display-lg text-display-lg text-primary tracking-tight" id="hero-balance-val">$14,850.00</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/40 text-secondary font-label-xs text-label-xs font-bold inline-flex items-center">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>+18.4%
+                  </span>
+</div>
+</div>
+<div class="p-2 rounded-xl bg-surface-container-high text-primary">
+<span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+</div>
+</div>
+<!-- Two-Up In/Out Cards -->
+<div class="grid grid-cols-2 gap-space-md mb-space-lg">
+<div class="p-space-md rounded-xl bg-surface-container-low shadow-sm">
+<div class="flex items-center gap-1.5 text-secondary font-label-xs text-label-xs mb-1">
+<span class="material-symbols-outlined text-[16px]">arrow_downward_alt</span>
+<span>Monthly Inflow</span>
+</div>
+<span class="font-headline-md text-headline-md text-secondary font-bold tracking-tight">+$6,420.00</span>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low shadow-sm">
+<div class="flex items-center gap-1.5 text-error font-label-xs text-label-xs mb-1">
+<span class="material-symbols-outlined text-[16px]">arrow_upward_alt</span>
+<span>Monthly Outflow</span>
+</div>
+<span class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">-$2,180.00</span>
+</div>
+</div>
+<!-- Mini Inline SVG Spending Rhythm Bar Chart -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm mb-space-md">
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-sm text-label-sm text-primary font-bold">Weekly Cashflow Momentum</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">Last 4 Weeks</span>
+</div>
+<div class="w-full h-20">
+<svg class="w-full h-full text-primary" fill="none" preserveaspectratio="none" viewbox="0 0 320 60">
+<!-- Gridlines -->
+<line stroke="currentColor" stroke-dasharray="2 2" stroke-opacity="0.08" x1="0" x2="320" y1="15" y2="15"></line>
+<line stroke="currentColor" stroke-dasharray="2 2" stroke-opacity="0.08" x1="0" x2="320" y1="35" y2="35"></line>
+<!-- Bars Pairs (Income vs Expense) -->
+<!-- Week 1 -->
+<rect fill="#172554" height="45" rx="3" width="10" x="25" y="10"></rect>
+<rect fill="#006e2f" fill-opacity="0.75" height="27" rx="3" width="10" x="38" y="28"></rect>
+<!-- Week 2 -->
+<rect fill="#172554" height="37" rx="3" width="10" x="95" y="18"></rect>
+<rect fill="#006e2f" fill-opacity="0.75" height="23" rx="3" width="10" x="108" y="32"></rect>
+<!-- Week 3 -->
+<rect fill="#172554" height="47" rx="3" width="10" x="165" y="8"></rect>
+<rect fill="#006e2f" fill-opacity="0.75" height="31" rx="3" width="10" x="178" y="24"></rect>
+<!-- Week 4 -->
+<rect fill="#172554" height="41" rx="3" width="10" x="235" y="14"></rect>
+<rect fill="#006e2f" fill-opacity="0.75" height="20" rx="3" width="10" x="248" y="35"></rect>
+</svg>
+</div>
+<div class="flex justify-around text-center text-on-surface-variant font-label-xs text-label-xs mt-1">
+<span>W1</span><span>W2</span><span>W3</span><span>W4</span>
+</div>
+</div>
+<!-- Transaction Rows Preview -->
+<div class="space-y-2">
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">domain</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-primary font-bold">Acme Corp Payroll</p>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Direct Deposit • Yesterday</span>
+</div>
+</div>
+<span class="font-label-md text-label-md text-secondary font-bold">+$3,200.00</span>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-primary font-bold">Nordic Roast Coffee</p>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Groceries &amp; Dining • Today</span>
+</div>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-bold">-$14.25</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- EDITORIAL FEATURE MOSAIC / BENEFIT GRID -->
+<section class="bg-surface-container-low py-16 lg:py-24" id="features">
+<div class="max-w-7xl mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop">
+<div class="flex flex-col items-center text-center max-w-2xl mx-auto mb-14">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-on-surface-variant font-bold">Engineered for Transparency</span>
+<h2 class="font-headline-lg text-headline-lg text-primary tracking-tight mt-1 mb-3">
+          Thoughtfully Designed for Confident Stewardship
+        </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+          PocketWise eliminates spreadsheet fatigue with automated clarity, proactive boundaries, and clean analytical feeds.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter-desktop">
+<!-- Card 1 -->
+<div class="group bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 rounded-xl bg-tertiary-fixed flex items-center justify-center text-primary mb-5 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[26px]">receipt_long</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary tracking-tight mb-2">Track Every Cent</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">
+              Real-time multi-currency logging with frictionless categorization and tax-ready tags.
+            </p>
+</div>
+<div class="pt-4 border-t border-surface-container-high/60 flex items-center gap-2 text-primary font-label-xs text-label-xs">
+<span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
+<span>OCR Receipt Detection</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 rounded-xl bg-secondary-container/60 flex items-center justify-center text-secondary mb-5 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[26px]">donut_small</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary tracking-tight mb-2">Understand Habits</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">
+              Unpack merchant leaks, silent subscriptions, and lifestyle expenses without mental friction.
+            </p>
+</div>
+<div class="pt-4 border-t border-surface-container-high/60 flex items-center gap-2 text-primary font-label-xs text-label-xs">
+<span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
+<span>Subscription Guardian</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 rounded-xl bg-tertiary-fixed-dim/40 flex items-center justify-center text-primary-container mb-5 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[26px]">monitoring</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary tracking-tight mb-2">Smart Forecasts</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">
+              Predictive net-worth modeling reveals where your balances stand 3, 6, and 12 months ahead.
+            </p>
+</div>
+<div class="pt-4 border-t border-surface-container-high/60 flex items-center gap-2 text-primary font-label-xs text-label-xs">
+<span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
+<span>Dynamic Run-Rate Modeling</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest flex items-center justify-center text-primary mb-5 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[26px]">savings</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary tracking-tight mb-2">Goal Vaults</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">
+              Envelope-style sub-accounts protect your emergency cushion and long-term milestones.
+            </p>
+</div>
+<div class="pt-4 border-t border-surface-container-high/60 flex items-center gap-2 text-primary font-label-xs text-label-xs">
+<span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
+<span>Dynamic Cushion Lock</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- INTERACTIVE LIVE SIMULATOR SECTION -->
+<section class="max-w-7xl mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop py-16 lg:py-24 w-full">
+<div class="bg-primary-container rounded-2xl text-on-primary p-space-lg md:p-12 shadow-xl relative overflow-hidden">
+<!-- Decorative Backdrop Geometry -->
+<div class="absolute -right-24 -top-24 w-96 h-96 rounded-full bg-tertiary-container/30 blur-2xl pointer-events-none"></div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+<div class="lg:col-span-6 flex flex-col gap-3">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-secondary-container font-bold">Interactive Wealth Engine</span>
+<h2 class="font-headline-lg text-headline-lg text-on-primary tracking-tight">
+            See Your 1-Year Compound Potential
+          </h2>
+<p class="font-body-md text-body-md text-tertiary-fixed-dim max-w-md">
+            Slide your regular monthly income to observe how consistent stewardship builds a high-yield safety vault.
+          </p>
+<!-- Input Slider -->
+<div class="mt-4 bg-tertiary-container/40 p-space-md rounded-xl backdrop-blur-md">
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-sm text-label-sm text-tertiary-fixed">Monthly Net Income</span>
+<span class="font-title-md text-title-md text-on-primary font-bold" id="slider-income-display">$6,500</span>
+</div>
+<input class="w-full h-2 bg-primary rounded-lg appearance-none cursor-pointer accent-secondary-fixed" id="income-range" max="20000" min="2000" step="250" type="range" value="6500"/>
+<div class="flex justify-between font-label-xs text-label-xs text-tertiary-fixed-dim/70 mt-2">
+<span>$2k/mo</span>
+<span>$10k/mo</span>
+<span>$20k/mo</span>
+</div>
+</div>
+<!-- Savings Rate Switch -->
+<div class="flex items-center gap-3 pt-2">
+<span class="font-label-sm text-label-sm text-tertiary-fixed">Target Allocation:</span>
+<div class="flex gap-2">
+<button class="rate-btn px-3 py-1 rounded-full bg-secondary-fixed text-primary font-label-xs text-label-xs font-bold transition-all" data-rate="0.20" type="button">20% Core</button>
+<button class="rate-btn px-3 py-1 rounded-full bg-tertiary-container text-tertiary-fixed font-label-xs text-label-xs transition-all hover:bg-surface-tint/20" data-rate="0.30" type="button">30% High</button>
+<button class="rate-btn px-3 py-1 rounded-full bg-tertiary-container text-tertiary-fixed font-label-xs text-label-xs transition-all hover:bg-surface-tint/20" data-rate="0.40" type="button">40% Aggressive</button>
+</div>
+</div>
+</div>
+<!-- Calculated Live Preview Card -->
+<div class="lg:col-span-6 bg-surface-container-lowest text-on-surface p-space-lg rounded-2xl shadow-lg">
+<div class="flex items-center justify-between mb-4">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-bold">12-Month Projected Reserves</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/40 text-secondary font-label-xs text-label-xs font-bold">5.1% APY Benchmark</span>
+</div>
+<div class="flex items-baseline gap-2 mb-6">
+<span class="font-display-lg text-display-lg text-primary tracking-tight" id="projected-annual">$16,029</span>
+<span class="font-label-xs text-label-xs text-secondary font-semibold">incl. interest</span>
+</div>
+<!-- Breakdown Pillars -->
+<div class="space-y-3 pt-2 border-t border-surface-container-high/60">
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant font-body-sm text-body-sm">Monthly Saved Capital</span>
+<span class="font-title-md text-title-md text-primary font-bold" id="monthly-saved-val">$1,300.00</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant font-body-sm text-body-sm">Estimated Compounded Returns</span>
+<span class="font-title-md text-title-md text-secondary font-bold" id="interest-earned-val">+$429.00</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant font-body-sm text-body-sm">Emergency Runaway Cushion</span>
+<span class="font-title-md text-title-md text-primary font-bold" id="runway-val">3.8 Months</span>
+</div>
+</div>
+<a class="mt-6 w-full inline-block text-center py-3 rounded-xl bg-primary-container text-on-primary font-label-md text-label-md hover:bg-primary transition-colors" data-path="wallet" href="#">
+            Lock In This Target
+          </a>
+</div>
+</div>
+</div>
+</section>
+<!-- TRUST & SOCIAL PROOF BADGES -->
+<section class="max-w-7xl mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop pb-16 w-full">
+<div class="rounded-2xl bg-surface-container-lowest p-space-lg shadow-sm">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-secondary-container/40 flex items-center justify-center text-secondary mb-2">
+<span class="material-symbols-outlined text-[22px]">lock</span>
+</div>
+<span class="font-label-md text-label-md text-primary font-bold">256-bit Bank Grade Cipher</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-xs mt-0.5">
+            Your balances remain encrypted end-to-end with SOC2 compliant standards.
+          </p>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-secondary-container/40 flex items-center justify-center text-secondary mb-2">
+<span class="material-symbols-outlined text-[22px]">visibility_off</span>
+</div>
+<span class="font-label-md text-label-md text-primary font-bold">Zero Ad Tracking</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-xs mt-0.5">
+            We never sell your ledger data. You are our steward, not the product.
+          </p>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-secondary-container/40 flex items-center justify-center text-secondary mb-2">
+<span class="material-symbols-outlined text-[22px]">download</span>
+</div>
+<span class="font-label-md text-label-md text-primary font-bold">Instant CSV &amp; JSON Export</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-xs mt-0.5">
+            Download your raw financial history with one tap, anytime without lock-in.
+          </p>
+</div>
+</div>
+</div>
+</section>
+<!-- POLISHED FOOTER -->
+<footer class="bg-surface-container-lowest border-t border-surface-container-high/60 mt-8 py-12">
+<div class="max-w-7xl mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="flex flex-col items-center md:items-start gap-1">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-md bg-primary-container text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">account_balance_wallet</span>
+</div>
+<span class="font-title-md text-title-md text-primary font-bold tracking-tight">PocketWise</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Quiet stewardship for everyday financial peace of mind.
+        </p>
+</div>
+<div class="flex flex-wrap items-center justify-center gap-6 font-label-sm text-label-sm text-on-surface-variant">
+<a class="hover:text-primary transition-colors" href="#">About</a>
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Security Standards</a>
+<a class="hover:text-primary transition-colors" href="#">Contact</a>
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">
+        © 2025 PocketWise Inc. All rights reserved.
+      </div>
+</div>
+</footer>
+<!-- Micro-interaction JavaScript -->
+
+</div></main><aside class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-lg pointer-events-auto"><nav class="flex items-center justify-around bg-surface-container-lowest/95 backdrop-blur-xl border border-outline-variant/40 rounded-full px-space-sm py-space-xs shadow-[0_10px_25px_-5px_rgba(15,23,42,0.12),0_8px_10px_-6px_rgba(15,23,42,0.06)]" data-active-classes="bg-primary text-on-primary shadow-sm"><a aria-current="page" class="flex flex-col items-center gap-0.5 px-2.5 sm:px-space-md py-1.5 rounded-full transition-all bg-primary text-on-primary shadow-sm" data-path="home" href="#"><span class="material-symbols-outlined text-[20px]">home</span><span class="font-label-xs text-label-xs">Home</span></a><a class="flex flex-col items-center gap-0.5 px-2.5 sm:px-space-md py-1.5 rounded-full text-on-surface-variant hover:text-on-surface transition-all" data-path="account" href="#"><span class="material-symbols-outlined text-[20px]">person</span><span class="font-label-xs text-label-xs">Account</span></a><a class="flex flex-col items-center gap-0.5 px-2.5 sm:px-space-md py-1.5 rounded-full text-on-surface-variant hover:text-on-surface transition-all" data-path="wallet" href="#"><span class="material-symbols-outlined text-[20px]">account_balance_wallet</span><span class="font-label-xs text-label-xs">Wallet</span></a><a class="flex flex-col items-center gap-0.5 px-2.5 sm:px-space-md py-1.5 rounded-full text-on-surface-variant hover:text-on-surface transition-all" data-path="analysis" href="#"><span class="material-symbols-outlined text-[20px]">bar_chart</span><span class="font-label-xs text-label-xs">Analysis</span></a><a class="flex flex-col items-center gap-0.5 px-2.5 sm:px-space-md py-1.5 rounded-full text-on-surface-variant hover:text-on-surface transition-all" data-path="settings" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span class="font-label-xs text-label-xs">Settings</span></a></nav></aside>

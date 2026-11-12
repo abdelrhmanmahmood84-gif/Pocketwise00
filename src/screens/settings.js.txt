@@ -1,0 +1,214 @@
+
+  // Toast Dispatcher
+  window.showToast = function(msg) {
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.className = 'pointer-events-auto flex items-center gap-2 bg-primary text-on-primary px-4 py-3 rounded-xl shadow-lg font-label-sm text-label-sm transition-all transform duration-300 translate-y-2 opacity-0';
+    toast.innerHTML = `<span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>${msg}</span>`;
+    container.appendChild(toast);
+    
+    // Animate in
+    setTimeout(() => {
+      toast.classList.remove('translate-y-2', 'opacity-0');
+    }, 10);
+    
+    // Fade out
+    setTimeout(() => {
+      toast.classList.add('opacity-0', 'translate-y-2');
+      setTimeout(() => toast.remove(), 300);
+    }, 3200);
+  };
+
+  // Profile Save Action
+  window.saveProfile = function() {
+    const msg = document.getElementById('profile-status-msg');
+    msg.classList.remove('hidden');
+    window.showToast('Profile parameters stored successfully.');
+    setTimeout(() => {
+      msg.classList.add('hidden');
+    }, 4000);
+  };
+
+  // Avatar Upload / Remove
+  const avatarInput = document.getElementById('avatar-input');
+  const avatarPreview = document.getElementById('profile-avatar-preview');
+  if (avatarInput) {
+    avatarInput.addEventListener('change', function(e) {
+      if (e.target.files && e.target.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          avatarPreview.src = evt.target.result;
+          window.showToast('Avatar updated.');
+        };
+        reader.readAsDataURL(e.target.files[0]);
+      }
+    });
+  }
+
+  const btnRemoveAvatar = document.getElementById('btn-remove-avatar');
+  if (btnRemoveAvatar) {
+    btnRemoveAvatar.addEventListener('click', function() {
+      avatarPreview.src = 'https://ui-avatars.com/api/?name=Alex+Mercer&background=000f3f&color=ffffff&size=160';
+      window.showToast('Profile photo reset to initials.');
+    });
+  }
+
+  // Currency Selection Preview
+  window.updateCurrencyBadge = function(val) {
+    const badge = document.getElementById('currency-symbol-display');
+    const symbols = {
+      'USD': '$',
+      'EUR': '€',
+      'GBP': '£',
+      'EGP': 'E£'
+    };
+    if (badge && symbols[val]) {
+      badge.textContent = symbols[val];
+      window.showToast(`Active calculation currency set to ${val} (${symbols[val]})`);
+    }
+  };
+
+  // Theme Switcher Mock
+  window.selectTheme = function(mode) {
+    const lightCard = document.getElementById('theme-light-card');
+    const darkCard = document.getElementById('theme-dark-card');
+    const lightCheck = document.getElementById('light-check');
+    const darkCheck = document.getElementById('dark-check');
+
+    if (mode === 'light') {
+      lightCard.classList.add('shadow-md');
+      lightCard.classList.remove('opacity-80');
+      darkCard.classList.remove('shadow-md');
+      darkCard.classList.add('opacity-80');
+      lightCheck.classList.remove('hidden');
+      darkCheck.classList.add('hidden');
+      window.showToast('Solar Light theme activated.');
+    } else {
+      darkCard.classList.add('shadow-md');
+      darkCard.classList.remove('opacity-80');
+      lightCard.classList.remove('shadow-md');
+      lightCard.classList.add('opacity-80');
+      darkCheck.classList.remove('hidden');
+      lightCheck.classList.add('hidden');
+      window.showToast('Nocturne Dark preview rendered.');
+    }
+  };
+
+  // Threshold Slider Value
+  window.updateThreshold = function(val) {
+    const badge = document.getElementById('slider-val-badge');
+    if (badge) badge.textContent = val;
+  };
+
+  // Toggle Switches
+  window.toggleSwitch = function(btn) {
+    const knob = btn.querySelector('span');
+    const isChecked = knob.classList.contains('translate-x-6');
+    if (isChecked) {
+      knob.classList.remove('translate-x-6');
+      knob.classList.add('translate-x-0');
+      btn.classList.remove('bg-primary-container');
+      btn.classList.add('bg-outline-variant');
+      window.showToast('Notification preference disabled.');
+    } else {
+      knob.classList.remove('translate-x-0');
+      knob.classList.add('translate-x-6');
+      btn.classList.add('bg-primary-container');
+      btn.classList.remove('bg-outline-variant');
+      window.showToast('Notification preference enabled.');
+    }
+  };
+
+  // Security SSO Disconnect
+  window.disconnectGoogle = function(btn) {
+    btn.textContent = 'Disconnected';
+    btn.disabled = true;
+    btn.classList.add('opacity-50', 'cursor-not-allowed');
+    window.showToast('Google Federated Auth unlinked.');
+  };
+
+  // Password Mock
+  window.changePassword = function() {
+    const curr = document.getElementById('curr-pass');
+    const n = document.getElementById('new-pass');
+    const c = document.getElementById('conf-pass');
+    if (!curr.value || !n.value || !c.value) {
+      window.showToast('Please fill out all passphrase fields.');
+      return;
+    }
+    if (n.value !== c.value) {
+      window.showToast('Passphrase confirmation does not match.');
+      return;
+    }
+    curr.value = '';
+    n.value = '';
+    c.value = '';
+    window.showToast('Master passphrase rotated and synced.');
+  };
+
+  // Revoke Session Actions
+  window.revokeSession = function(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.remove();
+      window.showToast('Hardware device session revoked.');
+    }
+  };
+
+  window.revokeOtherSessions = function() {
+    const extraSession = document.getElementById('session-iphone');
+    if (extraSession) extraSession.remove();
+    window.showToast('All auxiliary terminal sessions terminated.');
+  };
+
+  // Download Trigger
+  window.triggerDownload = function(fileName) {
+    window.showToast(`Compiling and preparing download: ${fileName}`);
+  };
+
+  // Delete Modal Operations
+  window.openDeleteModal = function() {
+    document.getElementById('delete-modal').classList.remove('hidden');
+  };
+
+  window.closeDeleteModal = function() {
+    document.getElementById('delete-modal').classList.add('hidden');
+    document.getElementById('delete-confirmation-input').value = '';
+    const btn = document.getElementById('confirm-delete-btn');
+    btn.disabled = true;
+    btn.classList.add('opacity-50', 'cursor-not-allowed');
+  };
+
+  window.validateDeleteInput = function(val) {
+    const btn = document.getElementById('confirm-delete-btn');
+    if (val.trim() === 'DELETE POCKETWISE') {
+      btn.disabled = false;
+      btn.classList.remove('opacity-50', 'cursor-not-allowed');
+    } else {
+      btn.disabled = true;
+      btn.classList.add('opacity-50', 'cursor-not-allowed');
+    }
+  };
+
+  window.confirmPermanentDelete = function() {
+    window.closeDeleteModal();
+    window.showToast('Account scheduled for immediate purge.');
+  };
+
+  // Smooth scroll sync for navigation items
+  document.querySelectorAll('.settings-nav-item').forEach(item => {
+    item.addEventListener('click', function(e) {
+      document.querySelectorAll('.settings-nav-item').forEach(nav => {
+        nav.classList.remove('bg-surface-container', 'text-on-surface');
+        nav.classList.add('text-on-surface-variant');
+        const dot = nav.querySelector('span.rounded-full');
+        if (dot) dot.remove();
+      });
+      this.classList.add('bg-surface-container', 'text-on-surface');
+      this.classList.remove('text-on-surface-variant');
+      
+      const dot = document.createElement('span');
+      dot.className = 'w-1.5 h-1.5 rounded-full bg-primary';
+      this.appendChild(dot);
+    });
+  });

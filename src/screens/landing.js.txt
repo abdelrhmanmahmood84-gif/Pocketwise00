@@ -1,0 +1,50 @@
+
+    (function initCalculator() {
+      const incomeRange = document.getElementById('income-range');
+      const incomeDisplay = document.getElementById('slider-income-display');
+      const projectedAnnual = document.getElementById('projected-annual');
+      const monthlySavedVal = document.getElementById('monthly-saved-val');
+      const interestEarnedVal = document.getElementById('interest-earned-val');
+      const runwayVal = document.getElementById('runway-val');
+      const rateBtns = document.querySelectorAll('.rate-btn');
+
+      let currentRate = 0.20;
+
+      function updateCalc() {
+        const income = parseFloat(incomeRange.value);
+        incomeDisplay.textContent = '$' + income.toLocaleString();
+
+        const monthlySave = income * currentRate;
+        const totalPrincipal = monthlySave * 12;
+        // Simple benchmark 5.1% APY monthly compounding factor
+        const interest = totalPrincipal * (0.051 / 2);
+        const annualTotal = totalPrincipal + interest;
+
+        monthlySavedVal.textContent = '$' + Math.round(monthlySave).toLocaleString() + '.00';
+        interestEarnedVal.textContent = '+$' + Math.round(interest).toLocaleString() + '.00';
+        projectedAnnual.textContent = '$' + Math.round(annualTotal).toLocaleString();
+
+        const runway = (annualTotal / (income * 0.7)).toFixed(1);
+        runwayVal.textContent = runway + ' Months';
+      }
+
+      if (incomeRange) {
+        incomeRange.addEventListener('input', updateCalc);
+      }
+
+      rateBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          rateBtns.forEach(b => {
+            b.classList.remove('bg-secondary-fixed', 'text-primary', 'font-bold');
+            b.classList.add('bg-tertiary-container', 'text-tertiary-fixed');
+          });
+          btn.classList.add('bg-secondary-fixed', 'text-primary', 'font-bold');
+          btn.classList.remove('bg-tertiary-container', 'text-tertiary-fixed');
+          currentRate = parseFloat(btn.getAttribute('data-rate'));
+          updateCalc();
+        });
+      });
+
+      updateCalc();
+    })();
+  
