@@ -71,3 +71,4 @@ CREATE INDEX IF NOT EXISTS "transactions_user_date_idx" ON "transactions" ("user
 CREATE INDEX IF NOT EXISTS "transactions_user_type_idx" ON "transactions" ("user_id", "transaction_type");
 CREATE INDEX IF NOT EXISTS "transactions_user_cat_idx" ON "transactions" ("user_id", "category_id");
 CREATE INDEX IF NOT EXISTS "transactions_user_acc_idx" ON "transactions" ("user_id", "account_id");
+

@@ -43,3 +43,4 @@ describe("PocketWise Database Schema Verification", () => {
     expect(transactions.metadata).toBeDefined();
   });
 });
+
